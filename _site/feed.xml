@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hiddenbyte_log</title>
+    <description>a blog about sofware development
+</description>
+    <link>http://mehul.pt/</link>
+    <atom:link href="http://mehul.pt/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sat, 29 Nov 2014 00:07:17 +0000</pubDate>
+    <lastBuildDate>Sat, 29 Nov 2014 00:07:17 +0000</lastBuildDate>
+    <generator>Jekyll v2.5.2</generator>
+    
+      <item>
+        <title>Hello world!</title>
+        <description>&lt;p&gt;Hello world!&lt;/p&gt;
+</description>
+        <pubDate>Fri, 28 Nov 2014 23:26:19 +0000</pubDate>
+        <link>http://mehul.pt/hello/world/2014/11/28/hello-world.html</link>
+        <guid isPermaLink="true">http://mehul.pt/hello/world/2014/11/28/hello-world.html</guid>
+        
+        
+        <category>hello</category>
+        
+        <category>world</category>
+        
+      </item>
+    
+  </channel>
+</rss>
