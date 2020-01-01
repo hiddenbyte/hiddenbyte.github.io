@@ -1,5 +1,9 @@
+$bg-color: #F9F3F7;
+$font-stack: Helvetica, sans-serif;
+
 body  {
     margin-left: 25%;
     margin-right: 25%;
-    background-color: #fff4ca;
+    background-color: $bg-color;
+    font-family: $font-stack;
 }
