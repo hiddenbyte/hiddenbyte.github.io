@@ -1,12 +1,7 @@
 body {
-  margin-left: 25%;
-  margin-right: 25%;
   background-color: #FFFAEE;
   font-family: "PT Serif", serif;
-}
-
-header {
-  margin-bottom: 10px;
+  font-size: 20px;
 }
 
 footer {

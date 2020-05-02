@@ -2,18 +2,12 @@ $bg-color: #FFFAEE;
 $title-color: #008ED5;
 $link-color: #008ED5;
 $font-stack: 'PT Serif', serif;
-
-
+$font-size: 20px;
 
 body  {
-    margin-left: 25%;
-    margin-right: 25%;
     background-color: $bg-color;
     font-family: $font-stack;
-}
-
-header {
-    margin-bottom: 10px;
+    font-size: $font-size;
 }
 
 footer {
