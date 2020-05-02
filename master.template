@@ -9,10 +9,7 @@
     <header>
         <h1>hiddenbyte.log</h1>
     </header>
-    <main>
-  <h2>Hello World!!!</h2>
-  <div> <p>Any?</p> </div>
-</main>
+    {{template "content.template" .}}
     <footer>
     </footer>
   </body>

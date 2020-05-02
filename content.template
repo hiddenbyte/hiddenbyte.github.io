@@ -1,0 +1,9 @@
+<main>
+    <ul>
+        {{range .Entries}} 
+             <li>
+                {{ .CreatedAt.Format "2006-01-02 15:04:05" }} - <a href="{{.Path}}">{{.Title}}</a>
+            </li>
+        {{end}}
+    </ul>
+</main>

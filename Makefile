@@ -1,7 +1,10 @@
-build: clean css
-	
+.PHONY: build
+build: html css
+
+.PHONY: css
 css:
 	sass ./sass:./css
 
-clean:
-	rm -rf css
+.PHONY: html
+html:
+	cd ./vyasa/ && make build && cd .. && ./vyasa/dist/vyasa compile .
