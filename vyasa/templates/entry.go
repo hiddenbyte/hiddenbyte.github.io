@@ -6,6 +6,9 @@ import (
 	"time"
 )
 
+// DefaultEntryTemplateStyle entry template default style
+const DefaultEntryTemplateStyle = "/css/entry.css"
+
 // EntryTmplData entry template data
 type EntryTmplData struct {
 	Title     string
@@ -30,7 +33,8 @@ type EntryHTML struct {
 
 // EntryTmpl entry template
 type EntryTmpl struct {
-	t *template.Template
+	t     *template.Template
+	style string
 }
 
 // Execute execute entry template
@@ -42,7 +46,11 @@ func (tmpl EntryTmpl) Execute(entry *EntryTmplData, path string) (html EntryHTML
 	defer htmlDocument.Close()
 
 	// Execute entry template
-	err = tmpl.t.Execute(htmlDocument, entry)
+	err = tmpl.t.Execute(htmlDocument, struct {
+		*EntryTmplData
+		Style string
+	}{EntryTmplData: entry, Style: tmpl.style})
+
 	if err != nil {
 		return
 	}
@@ -57,5 +65,5 @@ func CreateEntryTmpl(paths ...string) (EntryTmpl, error) {
 	if err != nil {
 		return EntryTmpl{}, err
 	}
-	return EntryTmpl{t}, nil
+	return EntryTmpl{t, DefaultEntryTemplateStyle}, nil
 }

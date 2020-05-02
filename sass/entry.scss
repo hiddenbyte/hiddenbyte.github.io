@@ -1,1 +1,5 @@
-@use 'base'
+@import 'base';
+
+h2 {
+    color: $title-color;
+}

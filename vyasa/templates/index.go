@@ -6,6 +6,9 @@ import (
 	"sort"
 )
 
+// DefaultIndexTemplateStyle entry template default style
+const DefaultIndexTemplateStyle = "/css/index.css"
+
 // IndexTmplData index template data
 type IndexTmplData struct {
 	Entries chan EntryHTML
@@ -13,7 +16,8 @@ type IndexTmplData struct {
 
 // IndexTmpl entry template
 type IndexTmpl struct {
-	t *template.Template
+	t     *template.Template
+	style string
 }
 
 // Execute execute entry template
@@ -32,7 +36,11 @@ func (tmpl IndexTmpl) Execute(tmplData *IndexTmplData, path string) (err error) 
 	sort.Slice(sortedEntries, func(i, j int) bool { return sortedEntries[i].CreatedAt.After(sortedEntries[j].CreatedAt) })
 
 	// Execute entry template
-	err = tmpl.t.Execute(htmlDocument, struct{ Entries []EntryHTML }{Entries: sortedEntries})
+	err = tmpl.t.Execute(htmlDocument, struct {
+		Entries []EntryHTML
+		Style   string
+	}{Entries: sortedEntries, Style: tmpl.style})
+
 	if err != nil {
 		return
 	}
@@ -46,5 +54,5 @@ func NewIndexTmpl(paths ...string) (IndexTmpl, error) {
 	if err != nil {
 		return IndexTmpl{}, err
 	}
-	return IndexTmpl{t}, nil
+	return IndexTmpl{t, DefaultIndexTemplateStyle}, nil
 }
