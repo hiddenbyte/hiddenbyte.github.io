@@ -1,1 +1,21 @@
 @import 'base';
+
+h3 {
+    a {
+        color: #008ED5;
+    }
+}
+
+table {
+    th {
+        text-align: left;
+    }
+
+    tbody{
+        tr {
+            td.time {
+                color: #919191;
+            }
+        }
+    }
+}

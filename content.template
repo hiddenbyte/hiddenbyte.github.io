@@ -1,9 +1,17 @@
 <main>
-    <ul>
-        {{range .Entries}} 
-             <li>
-                {{ .CreatedAt.Format "2006-01-02 15:04:05" }} - <a href="{{.Path}}">{{.Title}}</a>
-            </li>
-        {{end}}
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">Posts</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .Entries}} 
+             <tr>
+                <td class="time">{{ .CreatedAt.Format "2006-01-02 15:04:05" }}</td>
+                <td><a href="{{.Path}}">{{.Title}}</a></td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
 </main>

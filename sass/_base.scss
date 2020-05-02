@@ -1,10 +1,33 @@
 $bg-color: #FFFAEE;
 $title-color: #008ED5;
-$font-stack: 'Bitter', serif;
+$link-color: #008ED5;
+$font-stack: 'PT Serif', serif;
+
+
 
 body  {
     margin-left: 25%;
     margin-right: 25%;
     background-color: $bg-color;
     font-family: $font-stack;
+}
+
+header {
+    margin-bottom: 10px;
+}
+
+footer {
+    margin-top: 10px;
+}
+
+h2, h3, th {
+    color: $title-color;
+}
+
+a {
+    color: $link-color;
+}
+
+a:hover {
+    color: #0AF
 }

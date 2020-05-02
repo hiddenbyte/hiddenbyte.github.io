@@ -2,11 +2,27 @@ body {
   margin-left: 25%;
   margin-right: 25%;
   background-color: #FFFAEE;
-  font-family: "Bitter", serif;
+  font-family: "PT Serif", serif;
 }
 
-h2 {
+header {
+  margin-bottom: 10px;
+}
+
+footer {
+  margin-top: 10px;
+}
+
+h2, h3, th {
   color: #008ED5;
+}
+
+a {
+  color: #008ED5;
+}
+
+a:hover {
+  color: #0AF;
 }
 
 /*# sourceMappingURL=entry.css.map */
