@@ -3,6 +3,7 @@ package templates
 import (
 	"html/template"
 	"os"
+	"sort"
 )
 
 // IndexTmplData index template data
@@ -16,15 +17,22 @@ type IndexTmpl struct {
 }
 
 // Execute execute entry template
-func (tmpl IndexTmpl) Execute(entry *IndexTmplData, path string) (err error) {
+func (tmpl IndexTmpl) Execute(tmplData *IndexTmplData, path string) (err error) {
 	htmlDocument, err := os.Create(path)
 	if err != nil {
 		return
 	}
 	defer htmlDocument.Close()
 
+	// Order entries by "created at"
+	sortedEntries := make([]EntryHTML, 0)
+	for entry := range tmplData.Entries {
+		sortedEntries = append(sortedEntries, entry)
+	}
+	sort.Slice(sortedEntries, func(i, j int) bool { return sortedEntries[i].CreatedAt.After(sortedEntries[j].CreatedAt) })
+
 	// Execute entry template
-	err = tmpl.t.Execute(htmlDocument, entry)
+	err = tmpl.t.Execute(htmlDocument, struct{ Entries []EntryHTML }{Entries: sortedEntries})
 	if err != nil {
 		return
 	}
