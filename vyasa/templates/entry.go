@@ -47,9 +47,9 @@ func (tmpl EntryTmpl) Execute(entry *EntryTmplData, path string) (html EntryHTML
 
 	// Execute entry template
 	err = tmpl.t.Execute(htmlDocument, struct {
+		*MasterTmplData
 		*EntryTmplData
-		Style string
-	}{EntryTmplData: entry, Style: tmpl.style})
+	}{MasterTmplData: &MasterTmplData{Style: tmpl.style}, EntryTmplData: entry})
 
 	if err != nil {
 		return

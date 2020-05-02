@@ -11,7 +11,17 @@ const DefaultIndexTemplateStyle = "/css/index.css"
 
 // IndexTmplData index template data
 type IndexTmplData struct {
-	Entries chan EntryHTML
+	Entries []EntryHTML
+}
+
+// NewIndexTmplData creates a new index template data
+func NewIndexTmplData(entries chan EntryHTML) *IndexTmplData {
+	sortedEntries := make([]EntryHTML, 0)
+	for entry := range entries {
+		sortedEntries = append(sortedEntries, entry)
+	}
+	sort.Slice(sortedEntries, func(i, j int) bool { return sortedEntries[i].CreatedAt.After(sortedEntries[j].CreatedAt) })
+	return &IndexTmplData{sortedEntries}
 }
 
 // IndexTmpl entry template
@@ -28,18 +38,11 @@ func (tmpl IndexTmpl) Execute(tmplData *IndexTmplData, path string) (err error) 
 	}
 	defer htmlDocument.Close()
 
-	// Order entries by "created at"
-	sortedEntries := make([]EntryHTML, 0)
-	for entry := range tmplData.Entries {
-		sortedEntries = append(sortedEntries, entry)
-	}
-	sort.Slice(sortedEntries, func(i, j int) bool { return sortedEntries[i].CreatedAt.After(sortedEntries[j].CreatedAt) })
-
 	// Execute entry template
 	err = tmpl.t.Execute(htmlDocument, struct {
-		Entries []EntryHTML
-		Style   string
-	}{Entries: sortedEntries, Style: tmpl.style})
+		*MasterTmplData
+		*IndexTmplData
+	}{MasterTmplData: &MasterTmplData{Style: tmpl.style}, IndexTmplData: tmplData})
 
 	if err != nil {
 		return

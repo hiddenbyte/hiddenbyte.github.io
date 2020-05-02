@@ -28,7 +28,7 @@ func main() {
 	entryHTMLDocuments := make(chan templates.EntryHTML)
 	go createEntryHTMLDocuments(rootPath, entryHTMLDocuments)
 
-	createIndexHTMLDocument(rootPath, &templates.IndexTmplData{Entries: entryHTMLDocuments})
+	createIndexHTMLDocument(rootPath, templates.NewIndexTmplData(entryHTMLDocuments))
 }
 
 // createEntryHTMLDocuments creates entry HTML documents
