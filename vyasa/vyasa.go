@@ -1,34 +1,75 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"os"
 	"path/filepath"
 
 	"github.com/hiddenbyte/vyasa/entries"
 	"github.com/hiddenbyte/vyasa/files"
+	"github.com/hiddenbyte/vyasa/server"
 
 	"github.com/hiddenbyte/vyasa/templates"
 )
 
+var flagServer bool
+var flagWatch bool
+var flagCompile bool
+var flagRootDir string
+
+func init() {
+	flag.BoolVar(&flagServer, "server", false, "start a fileserver")
+	flag.BoolVar(&flagServer, "s", false, "start a fileserver (short)")
+
+	flag.BoolVar(&flagWatch, "watch", false, "watch mode")
+	flag.BoolVar(&flagWatch, "w", false, "watch mode (short)")
+
+	flag.BoolVar(&flagCompile, "compile", false, "compile")
+	flag.BoolVar(&flagCompile, "c", false, "compile (short)")
+
+	flag.StringVar(&flagRootDir, "directory", ".", "root directory")
+	flag.StringVar(&flagRootDir, "d", ".", "root directory (short)")
+}
+
 func main() {
-	args := os.Args[1:]
-
-	if len(args) != 2 {
-		log.Fatal("no command was specified")
+	flag.Parse()
+	switch {
+	case flagCompile:
+		compile(flagRootDir)
+		if flagWatch {
+			watch(flagRootDir)
+		}
+	case flagServer:
+		if flagWatch {
+			go startServer(flagRootDir)
+			watch(flagRootDir)
+		} else {
+			startServer(flagRootDir)
+		}
+	case flagWatch:
+		files.Watch([]string{"./entries/2020/05"}, func() { compile(flagRootDir) })
+	default:
+		flag.Usage()
+		os.Exit(1)
 	}
+}
 
-	command := args[0]
-	rootPath := args[1]
-
-	if command != "compile" {
-		log.Fatalf("unknown command '%s'", args[1])
-	}
-
+func compile(rootDir string) {
 	entryHTMLDocuments := make(chan templates.EntryHTML)
-	go createEntryHTMLDocuments(rootPath, entryHTMLDocuments)
+	go createEntryHTMLDocuments(rootDir, entryHTMLDocuments)
+	createIndexHTMLDocument(rootDir, templates.NewIndexTmplData(entryHTMLDocuments))
+}
 
-	createIndexHTMLDocument(rootPath, templates.NewIndexTmplData(entryHTMLDocuments))
+func startServer(rootDir string) {
+	err := server.Start(rootDir, 8013)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func watch(rootDir string) {
+	files.Watch([]string{"./entries/2020/05"}, func() { compile(rootDir) })
 }
 
 // createEntryHTMLDocuments creates entry HTML documents
