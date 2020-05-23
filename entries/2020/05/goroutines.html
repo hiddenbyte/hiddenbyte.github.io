@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>hiddenbyte.log</title>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/entry.css">
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165367789-1', { 'allow_ad_personalization_signals': false, 'anonymize_ip': true });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165367789-1"></script>
+  </head>
+  <body>
+    <header>
+        <h1>hiddenbyte.log</h1>
+    </header>
+    <main>
+  <h2>goroutines - go statements</h2>
+  <p>
+There are many languages and/or runtimes that enables to start two or more threads of exectution, Go enables it by introducing the concept of <i>goroutine</i>. 
+A <i>goroutine</i> is a thread of execution managed by the Go runtime.
+</p>
+<p>
+Before digging into <i>goroutines</i> let's see the difference between calling a function and launching a <i>goroutine</i>. The code bellow shows two function declaration, one named 
+<code>main</code> - the program entry point - and other named <code>sleepyReceiver</code> that is called by <code>main</code>.
+</p>
+<p>
+  <pre>
+  func main() {
+    sleepyReceiver("some message")
+  }
+
+  func sleepyReceiver(message string) {
+    time.Sleep(5 * time.Second)
+    log.Printf("sleepy: Received message '%v'", message)
+  }
+  </pre>
+</p>
+</main>
+    <footer>
+        Written by <a href="https://twitter.com/hiddenbyte" target="_blank">@hiddenbyte</a>
+    </footer>
+  </body>
+</html>

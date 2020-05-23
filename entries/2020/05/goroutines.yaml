@@ -1,0 +1,24 @@
+---
+Title: goroutines - go statements
+Time: 2020-05-22T20:50:00Z
+Content: |
+  <p>
+  There are many languages and/or runtimes that enables to start two or more threads of exectution, Go enables it by introducing the concept of <i>goroutine</i>. 
+  A <i>goroutine</i> is a thread of execution managed by the Go runtime.
+  </p>
+  <p>
+  Before digging into <i>goroutines</i> let's see the difference between calling a function and launching a <i>goroutine</i>. The code bellow shows two function declaration, one named 
+  <code>main</code> - the program entry point - and other named <code>sleepyReceiver</code> that is called by <code>main</code>.
+  </p>
+  <p>
+    <pre>
+    func main() {
+      sleepyReceiver("some message")
+    }
+
+    func sleepyReceiver(message string) {
+      time.Sleep(5 * time.Second)
+      log.Printf("sleepy: Received message '%v'", message)
+    }
+    </pre>
+  </p>
