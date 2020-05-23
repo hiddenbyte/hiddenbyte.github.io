@@ -48,8 +48,8 @@ Content: |
     }
     </pre>
   </p>
-
-    <p>
+  
+  <p>
     <pre>
     MOVL $0x10, 0(SP)
     LEAQ go.func.*+121(SB), AX
