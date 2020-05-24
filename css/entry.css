@@ -20,4 +20,11 @@ a:hover {
   color: #0AF;
 }
 
+code.golang, code.x64-assembly {
+  white-space: pre;
+  font-weight: 600;
+  display: block;
+  background-color: #F0EBDF;
+}
+
 /*# sourceMappingURL=entry.css.map */
