@@ -3,18 +3,24 @@ $title-color: #008ED5;
 $link-color: #008ED5;
 $font-stack: 'PT Serif', serif;
 $font-size: 20px;
+$max-width: 840px;
 
 body  {
     background-color: $bg-color;
     font-family: $font-stack;
     font-size: $font-size;
+
+    header, main, footer {
+        margin: 0 auto;
+        max-width: $max-width;
+    }
+
+    footer {
+        margin-top: 10px;
+    }
 }
 
-footer {
-    margin-top: 10px;
-}
-
-h2, h3, th {
+h2, h3, h4, th {
     color: $title-color;
 }
 

@@ -3,12 +3,15 @@ body {
   font-family: "PT Serif", serif;
   font-size: 20px;
 }
-
-footer {
+body header, body main, body footer {
+  margin: 0 auto;
+  max-width: 840px;
+}
+body footer {
   margin-top: 10px;
 }
 
-h2, h3, th {
+h2, h3, h4, th {
   color: #008ED5;
 }
 
