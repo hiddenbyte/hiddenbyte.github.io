@@ -2,7 +2,7 @@
 build: html css
 
 .PHONY: watch
-watch: html-watch css
+watch: build html-watch
 
 .PHONY: css
 css:
