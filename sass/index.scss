@@ -1,11 +1,5 @@
 @import 'base';
 
-h3 {
-    a {
-        color: #008ED5;
-    }
-}
-
 table {
     th {
         text-align: left;
@@ -14,7 +8,7 @@ table {
     tbody{
         tr {
             td.time {
-                color: #919191;
+                color: $pallete-color-5;
             }
         }
     }

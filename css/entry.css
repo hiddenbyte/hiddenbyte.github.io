@@ -1,7 +1,8 @@
 body {
-  background-color: #FFFAEE;
+  background-color: #fafafa;
   font-family: "PT Serif", serif;
   font-size: 20px;
+  color: #1d242b;
 }
 body header, body main, body footer {
   margin: 0 auto;
@@ -11,23 +12,24 @@ body footer {
   margin-top: 10px;
 }
 
+h1 a {
+  color: #1d242b;
+  text-decoration-line: none;
+}
+
 h2, h3, h4, th {
-  color: #008ED5;
+  color: #0077c0;
 }
 
 a {
-  color: #008ED5;
-}
-
-a:hover {
-  color: #0AF;
+  color: #0077c0;
 }
 
 code.golang, code.x64-assembly {
   white-space: pre;
   font-weight: 600;
   display: block;
-  background-color: #F0EBDF;
+  background-color: #dfdfdf;
 }
 
 p {

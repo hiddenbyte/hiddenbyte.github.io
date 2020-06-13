@@ -1,7 +1,8 @@
 body {
-  background-color: #FFFAEE;
+  background-color: #fafafa;
   font-family: "PT Serif", serif;
   font-size: 20px;
+  color: #1d242b;
 }
 body header, body main, body footer {
   margin: 0 auto;
@@ -11,27 +12,24 @@ body footer {
   margin-top: 10px;
 }
 
+h1 a {
+  color: #1d242b;
+  text-decoration-line: none;
+}
+
 h2, h3, h4, th {
-  color: #008ED5;
+  color: #0077c0;
 }
 
 a {
-  color: #008ED5;
-}
-
-a:hover {
-  color: #0AF;
-}
-
-h3 a {
-  color: #008ED5;
+  color: #0077c0;
 }
 
 table th {
   text-align: left;
 }
 table tbody tr td.time {
-  color: #919191;
+  color: #1d242b;
 }
 
 /*# sourceMappingURL=index.css.map */
