@@ -1,22 +1,30 @@
 ---
-Title: Digging into Goroutines - Launching
+Title: Digging into Goroutines I
 Time: 2020-05-22T20:50:00Z
 Content: |
   <p>
-  There are many languages and/or runtimes that enables to start two or more threads of exectution, Go enables it by introducing the concept of <i>goroutine</i>. 
-  A <i>goroutine</i> is a thread of execution managed by the Go runtime.
+    There are many programming languages and/or runtimes that enables writing programs with concurrent threads of execution, e.g. Java/JVM and C#/CLR allows 
+    to create threads of execution that are managed by the operating system scheduler; But these managed threads are <i>expensive</i> to create/maintain, luckily
+    there are already several solutions for the problem, one of them is the well known concept of <i>thread-pool</i>.
   </p>
 
-  <p>Before digging into <i>goroutines</i> let's understand the difference between calling a function and launching a <i>goroutine</i>.</p>
+  <p>
+      Go also allows writing programs with concurrent threads of execution trough the concept of <i>goroutine</i>.
+  <p>
 
-  <h3>Calling a function</h3>
+  <h3>Function Call vs Goroutine Launch</h3>
+  <p>
+    Before digging into <i>goroutines</i>, let's understand the difference between calling a function and launching a <i>goroutine</i>.
+  </p>
+
+  <h4>Calling a function</h4>
   <p>The code bellow shows two function declarations, one named <code>main</code> - the program entry point - and other named <code>sleepyReceiver</code> called by the <code>main</code> function.</p>
 
   <p>
     <code class="golang">
     func main() {
       sleepyReceiver("some message")
-    }
+    } 
 
     func sleepyReceiver(message string) {
       time.Sleep(2 * time.Second)
@@ -24,6 +32,7 @@ Content: |
     }
     </code>
   </p>
+
 
   <p>
     If we compile this code - <code>go build main.go</code> - and then disassemble the resulting executable using objdump - <code>go tool objdump main</code> - we can see that 
@@ -40,7 +49,7 @@ Content: |
 
   <p>Nothing out of the ordinary here, the <code>"some message"</code> argument is being copied to the stack and then the <code>sleepyReceiver</code> function is being called.</p>
 
-  <h3>Launching a goroutine</h3>
+  <h4>Launching a goroutine</h4>
 
   <p>Launching a <i>goroutine</i> is just as simple as calling a function and can be achieved by writing "go" statements.</p>
 
@@ -53,8 +62,10 @@ Content: |
   
   <p>
     Now we are going to make a slight change in the "Calling a function" example, we are going to call <code>sleepyReceiver</code> but start the execution of the function call in a different thread, by launching a goroutine, 
-    this can be achieved by adding the <code>go</code> keyword before the function call, as you can see bellow.
+    this can be achieved by adding the <code>go</code> keyword before the function call, as we can see bellow.
   </p>
+  
+  <p>An important aspect to notice here: we didn't make any change on <code>sleepyReceiver</code> in order to launch as a goroutine.</p>
 
   <p>
     <code class="golang">
@@ -64,8 +75,6 @@ Content: |
     </code>
   </p>
 
-  <p>An important aspect to notice here: we didn't make any change on <code>sleepyReceiver</code> in order launch as a goroutine.</p>
-  
   <p>
     <code class="x64-assembly">
     MOVL $0x10, 0(SP)
@@ -78,7 +87,11 @@ Content: |
     </code>
   </p>
 
-  <h3>References</h3>
+  <h4>Execution</h4>
+
+  <h5>runtime.newproc</h5>
+
+  <h4>References</h4>
   <ul>
       <li><a href="https://golang.org/cmd/objdump/">Command objdump</a></li>
   </ul>
