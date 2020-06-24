@@ -20,23 +20,28 @@
     <main>
   <h2>Digging into Goroutines I</h2>
   <p>
-  There are many programming languages and/or runtimes that enables writing programs with concurrent threads of execution, e.g. Java/JVM and C#/CLR allows 
-  to create threads of execution that are managed by the operating system scheduler; But these managed threads are <i>expensive</i> to create/maintain, luckily
-  there are already several solutions for the problem, one of them is the well known concept of <i>thread-pool</i>.
+  Many programming languages and/or runtimes enables writing programs with concurrent threads of execution, by providing the ability to create threads of execution 
+  managed by a operating system scheduler, e.g. Java/JVM and C#/CLR; or by providing a library and/or a runtime that allows to decompose a program into concurrent work items, 
+  e.g. <a target="_blank" href="https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.taskscheduler?view=netcore-3.1">TPL</a> on C#/CLR and <a target="_blank" href="https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/">Event Loop</a> on JS/Node.js-V8. 
+</p>
+<p>
+  Go enables it by introducing the concept of <i>goroutine</i>.
 </p>
 
-<p>
-    Go also allows writing programs with concurrent threads of execution trough the concept of <i>goroutine</i>.
-<p>
+ <blockquote>
+     A goroutine has a simple model: it is a function executing concurrently with other goroutines in the same address space. 
+     <footer>
+         in <cite><a href="https://golang.org/doc/effective_go.html#goroutines">Effective Go </a></cite>
+      </footer>
+ </blockquote>
 
 <h3>Function Call vs Goroutine Launch</h3>
 <p>
-  Before digging into <i>goroutines</i>, let's understand the difference between calling a function and launching a <i>goroutine</i>.
+  Before we dig into goroutines internals, let's understand the difference between a <i>function call</i> and a <i>goroutine launch</i>, from the Go compiler perspective.
 </p>
 
 <h4>Calling a function</h4>
-<p>The code bellow shows two function declarations, one named <code>main</code> - the program entry point - and other named <code>sleepyReceiver</code> called by the <code>main</code> function.</p>
-
+<p>The code bellow shows two function declarations: <code>main</code>, the program entry point; and <code>sleepyReceiver</code>, which is called inside the <code>main</code> function.</p>
 <p>
   <code class="golang">
   func main() {
@@ -50,11 +55,19 @@
   </code>
 </p>
 
+<p>
+  Let's compile the code above and disassemble the <code>sleepyReceiver("some message")</code> function call.
+</p>
 
 <p>
-  If we compile this code - <code>go build main.go</code> - and then disassemble the resulting executable using objdump - <code>go tool objdump main</code> - we can see that 
-  the <code>sleepyReceiver("some message")</code> function call was compiled into a stream of Assembly instructions bellow.
+  <code class="x64-assembly">
+  go build main.go
+  go tool objdump main
+  </code>
 </p>
+
+<p>Nothing out of the ordinary here, the <code>"some message"</code> argument is being copied to the stack and then the <code>sleepyReceiver</code> function is being called.</p>
+
 <p>
   <code class="x64-assembly">
   LEAQ go.string.*+4341(SB), AX
@@ -63,8 +76,6 @@
   CALL main.sleepyReceiver(SB)
   </code>
 </p>
-
-<p>Nothing out of the ordinary here, the <code>"some message"</code> argument is being copied to the stack and then the <code>sleepyReceiver</code> function is being called.</p>
 
 <h4>Launching a goroutine</h4>
 
