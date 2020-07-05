@@ -42,7 +42,7 @@ func (tmpl IndexTmpl) Execute(tmplData *IndexTmplData, path string) (err error) 
 	err = tmpl.t.Execute(htmlDocument, struct {
 		*MasterTmplData
 		*IndexTmplData
-	}{MasterTmplData: &MasterTmplData{Style: tmpl.style}, IndexTmplData: tmplData})
+	}{MasterTmplData: &MasterTmplData{Style: tmpl.style, DocumentTitle: "hiddenbyte.log"}, IndexTmplData: tmplData})
 
 	if err != nil {
 		return

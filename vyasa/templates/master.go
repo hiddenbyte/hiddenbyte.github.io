@@ -2,5 +2,6 @@ package templates
 
 // MasterTmplData master template data
 type MasterTmplData struct {
-	Style string
+	Style         string
+	DocumentTitle string
 }
