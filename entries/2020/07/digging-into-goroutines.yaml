@@ -1,0 +1,87 @@
+---
+Title: Digging into Goroutines I
+Time: 2020-07-05T23:34:00Z
+Content: |
+  <p>
+    Go enables writing programs with concurrent threads of execution. And it does by introducing the concept of <em>goroutine</em>.
+  </p>
+
+   <blockquote>
+       A goroutine has a simple model: it is a function executing concurrently with other goroutines in the same address space. 
+       <footer>
+           in <cite><a href="https://golang.org/doc/effective_go.html#goroutines">Effective Go </a></cite>
+        </footer>
+   </blockquote>
+
+  <p>   
+    Before digging into goroutines, having an understanding on "how" the  <em>Go compiler</em> and <em>runtime</em> work together in order to launch a <em>goroutine</em>, 
+    will pave the path to its internals.
+  </p>
+
+  <h3>Launching a goroutine</h3>
+
+  <p>Launching a <em>goroutine</em> is just as simple as calling a function and can be achieved by writing a "go" statement.</p>
+
+  <blockquote>
+    <p>A "go" statement starts the execution of a function call as an independent concurrent thread of control, or goroutine, within the same address space.</p>
+    <footer>
+         in <cite><a href="https://golang.org/ref/spec#Go_statements">The Go Programming Language Specification</a></cite>
+    </footer>
+  </blockquote>
+
+  <p>
+    The source code bellow - main.go - has a "go" statement declared (at line 9), that launches a goroutine, executing the <code>heavyWeightChamp</code> function in a different thread of execution.
+  </p>
+
+  <p>
+    <script src="https://gist.github.com/hiddenbyte/13c0a8d6e39ee9b4a45836142ebdf702.js"></script>
+  </p>
+
+  <p>
+    The Go compiler turns the "go" statement into a call to the <code>runtime.newproc<sup>1</sup></code> function. This can be verified by inspecting the application binary using <code>objdump<sup>2</sup></code> tool 
+    as depicted in the script bellow.
+  <p>
+
+  <p>
+    <script src="https://gist.github.com/hiddenbyte/7933f4437e6e1e13320a37b56fcc6b37.js"></script>
+  </p>
+
+  <p>
+    The <code>runtime.newproc</code> receives as function arguments:
+    <ul>
+        <li>the size (in bytes) of the arguments of the function launched as a goroutine;</li>
+        <li>a reference to the function launched as a goroutine, in this case, a reference to <code>heavyWeightChamp</code> function;</li>
+        <li>and all the arguments of the function launched as a goroutine.</li>
+    </ul>
+  </p>
+
+  <p>
+    At this point, we already know "how" the <em>Go compiler</em> and <em>runtime</em> work together to launch a <em>goroutine</em>: through the <code>runtime.newproc</code> function.
+  </p>
+
+
+  <h3>runtime.newproc</h3>
+
+  <p>
+    The <code>runtime.newproc</code> function is part of the <code>runtime</code> package. Also the function name is "unexported",
+    which means that it can only be referenced or used inside the <code>runtime</code> package and it <b>only can be called indirectly</b> through a "go" statement.
+  </p>
+
+  <p>
+    <code>runtime.newproc</code> is <b>responsible for creating a <em>goroutine</em></b>, which runs the provided function, and <b>placing it in a "waiting to run goroutines" queue.</b>
+  </p>
+
+  <h3>Conclusion</h3>
+
+  <ul>
+    <li><em>goroutines</em> are created by calling the <code>runtime.newproc</code> function;</li>
+    <li>The <code>runtime.newproc</code> function can only be called indirectly through a "go" statement, the compiler replaces the statement by a <code>runtime.newproc</code> call;</li>
+    <li>The <code>runtime.newproc</code> creates a <em>goroutine</em> and places in a "waiting to run" queue.</li>
+  </ul>
+
+  <h3>References</h3>
+
+  <ol>
+    <li><a target="_blank" href="https://golang.org/pkg/runtime/?m=all#newproc">https://golang.org/pkg/runtime/?m=all#newproc</a></li>
+    <li><a target="_blank" href="https://golang.org/cmd/objdump/">https://golang.org/cmd/objdump/</a></li>
+  </ol>
