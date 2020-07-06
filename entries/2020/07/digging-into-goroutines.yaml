@@ -18,6 +18,10 @@ Content: |
     will pave the path to its internals.
   </p>
 
+  <p>
+    Note: the examples and tools used on this document are based on Go 1.12.9 (darwin/amd64 build).
+  </p>
+  
   <h3>Launching a goroutine</h3>
 
   <p>Launching a <em>goroutine</em> is just as simple as calling a function and can be achieved by writing a "go" statement.</p>
