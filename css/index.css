@@ -32,4 +32,13 @@ table tbody tr td.time {
   color: #1d242b;
 }
 
+.a--blog-title {
+  font-weight: bold;
+}
+
+.td--time {
+  font-weight: lighter;
+  color: #1d242b;
+}
+
 /*# sourceMappingURL=index.css.map */

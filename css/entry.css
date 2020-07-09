@@ -25,9 +25,9 @@ a {
   color: #0077c0;
 }
 
-code.golang, code.x64-assembly {
-  white-space: pre;
-  display: block;
+blockquote {
+  padding: 5px;
+  text-align: justify;
   background-color: #dfdfdf;
 }
 

@@ -1,11 +1,9 @@
 @import 'base';
 
-code {
-    &.golang, &.x64-assembly {
-        white-space: pre;
-        display: block;
-        background-color: #dfdfdf;
-    }
+blockquote {
+    padding: 5px;
+    text-align: justify;
+    background-color: $pallete-color-2;
 }
 
 p {

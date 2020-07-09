@@ -1,5 +1,5 @@
 <main>
-    <h2>Entries</h2>
+    <h2></h2>
     <table>
         <thead>
             <tr>
@@ -9,8 +9,8 @@
         <tbody>
             {{range .Entries}} 
              <tr>
-                <td class="time">{{ .CreatedAt.Format "2006-01-02" }}</td>
-                <td><a href="{{.Path}}">{{.Title}}</a></td>
+                <td class="td--time">{{ .CreatedAt.Format "2006-01-02" }}</td>
+                <td><a class="a--blog-title" href="{{.Path}}">{{.Title}}</a></td>
             </tr>
             {{end}}
         </tbody>

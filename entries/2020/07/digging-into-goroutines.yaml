@@ -26,7 +26,7 @@ Content: |
   <p>Launching a <em>goroutine</em> is just as simple as calling a function and can be achieved by writing a "go" statement.</p>
 
   <blockquote>
-    <p>A "go" statement starts the execution of a function call as an independent concurrent thread of control, or goroutine, within the same address space.</p>
+    A "go" statement starts the execution of a function call as an independent concurrent thread of control, or goroutine, within the same address space.
     <footer>
          in <cite><a href="https://golang.org/ref/spec#Go_statements">The Go Programming Language Specification</a></cite>
     </footer>
