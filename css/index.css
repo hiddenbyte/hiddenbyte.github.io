@@ -25,20 +25,13 @@ a {
   color: #0077c0;
 }
 
-table th {
-  text-align: left;
-}
-table tbody tr td.time {
-  color: #1d242b;
-}
-
-.a--blog-title {
-  font-weight: bold;
-}
-
-.td--time {
+.blog-date {
   font-weight: lighter;
   color: #1d242b;
+}
+
+.blog-title {
+  font-weight: bold;
 }
 
 /*# sourceMappingURL=index.css.map */

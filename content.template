@@ -9,8 +9,8 @@
         <tbody>
             {{range .Entries}} 
              <tr>
-                <td class="td--time">{{ .CreatedAt.Format "2006-01-02" }}</td>
-                <td><a class="a--blog-title" href="{{.Path}}">{{.Title}}</a></td>
+                <td class="blog-date">{{ .CreatedAt.Format "2006-01-02" }}</td>
+                <td class="blog-title"><a class="a--blog-title" href="{{.Path}}">{{.Title}}</a></td>
             </tr>
             {{end}}
         </tbody>
