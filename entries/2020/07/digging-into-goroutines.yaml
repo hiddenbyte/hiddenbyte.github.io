@@ -9,7 +9,7 @@ Content: |
    <blockquote>
        A goroutine has a simple model: it is a function executing concurrently with other goroutines in the same address space. 
        <footer>
-           in <cite><a href="https://golang.org/doc/effective_go.html#goroutines">Effective Go </a></cite>
+            in <cite><a href="https://golang.org/doc/effective_go.html#goroutines">Effective Go </a></cite>
         </footer>
    </blockquote>
 
@@ -28,7 +28,7 @@ Content: |
   <blockquote>
     A "go" statement starts the execution of a function call as an independent concurrent thread of control, or goroutine, within the same address space.
     <footer>
-         in <cite><a href="https://golang.org/ref/spec#Go_statements">The Go Programming Language Specification</a></cite>
+        in <cite><a href="https://golang.org/ref/spec#Go_statements">The Go Programming Language Specification</a></cite>
     </footer>
   </blockquote>
 
@@ -37,7 +37,21 @@ Content: |
   </p>
 
   <p>
-    <script src="https://gist.github.com/hiddenbyte/13c0a8d6e39ee9b4a45836142ebdf702.js"></script>
+    <pre><code class="go listing">  package main
+
+    import (
+        "log"
+        "time"
+    )
+
+    func main() {
+        go heavyWeightChamp("some message")
+        time.Sleep(2 * time.Second)
+    }
+
+    func heavyWeightChamp(message string) {
+        log.Printf("heavyWeightChamp: Received message '%v'", message)
+    }</code></pre>
   </p>
 
   <p>
@@ -46,7 +60,16 @@ Content: |
   <p>
 
   <p>
-    <script src="https://gist.github.com/hiddenbyte/7933f4437e6e1e13320a37b56fcc6b37.js"></script>
+    <pre><code class="bash listing">  go build main.go
+    go tool objdump main | grep  main.go:9
+    # Output:
+    #  main.go:9    0x109659d   c7042410000000      MOVL $0x10, 0(SP)
+    #  main.go:9    0x10965a4   488d055da10300      LEAQ go.func.*+127(SB), AX
+    #  main.go:9    0x10965ab   4889442408          MOVQ AX, 0x8(SP)
+    #  main.go:9    0x10965b0   488d05be410300      LEAQ go.string.*+4341(SB), AX
+    #  main.go:9    0x10965b7   4889442410          MOVQ AX, 0x10(SP)
+    #  main.go:9    0x10965bc   48c74424180c000000  MOVQ $0xc, 0x18(SP)
+    #  main.go:9    0x10965c5   e836a9f9ff          CALL runtime.newproc(SB)</code></pre>
   </p>
 
   <p>
