@@ -33,7 +33,7 @@ Content: |
   </blockquote>
 
   <p>
-    The source code bellow - main.go - has a "go" statement declared (at line 9), that launches a goroutine, executing the <code>heavyWeightChamp</code> function in a different thread of execution.
+    The source code below - main.go - has a "go" statement declared (at line 9), that launches a goroutine, executing the <code>heavyWeightChamp</code> function in a different thread of execution.
   </p>
 
   <p>
@@ -56,7 +56,7 @@ Content: |
 
   <p>
     The Go compiler turns the "go" statement into a call to the <code>runtime.newproc<sup>1</sup></code> function. This can be verified by inspecting the application binary using <code>objdump<sup>2</sup></code> tool 
-    as depicted in the script bellow.
+    as depicted in the script below.
   <p>
 
   <p>
