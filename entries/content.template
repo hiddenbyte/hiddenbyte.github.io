@@ -1,5 +1,0 @@
-<main>
-  <p>{{ .CreatedAt.Format "2006-01-02" }}</p>
-  <h2>{{.Title}}</h2>
-  {{.Content}}
-</main>
