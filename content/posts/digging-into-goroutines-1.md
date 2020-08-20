@@ -65,7 +65,7 @@ The `runtime.newproc` receives as function arguments:
 * a reference to the function launched as a goroutine, in this case, a reference to `heavyWeightChamp` function;
 * and all the arguments of the function launched as a goroutine.
 
-At this point, we already know "how" the _Go compiler_ and _runtime_ work together to launch a _goroutine_: through the _runtime.newproc_ function.
+At this point, we already know "how" the _Go compiler_ and _runtime_ work together to launch a _goroutine_: through the `runtime.newproc` function.
 
 ### runtime.newproc
 

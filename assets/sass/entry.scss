@@ -9,8 +9,6 @@ p {
     text-align: justify;
 }
 
-code {
-    &.language-bash, &.language-go {
-        font-size: 14px;
-    }
+.highlight {
+    font-size: $code-font-size;
 }
