@@ -23,9 +23,9 @@ Launching a _goroutine_ is just as simple as calling a function and can be achie
 > in [The Go Programming Language Specification](https://golang.org/ref/spec#Go_statements "The Go Programming Language Specification")
 
 
-The source code below - main.go - has a "go" statement declared (at line 9), that launches a goroutine, executing the <code>heavyWeightChamp</code> function in a different thread of execution.
+The source code below - main.go - has a "go" statement declared (at line 9), that launches a goroutine, executing the `heavyWeightChamp` function in a different thread of execution.
 
-```go
+```go {linenos=table,hl_lines=[9]}
 package main
 
 import (
@@ -45,7 +45,7 @@ func heavyWeightChamp(message string) {
 
 The Go compiler turns the "go" statement into a call to the `runtime.newproc`[^1] function. This can be verified by inspecting the application binary using `objdump`[^2] tool as depicted in the script below.
 
-```bash
+```bash {linenos=table}
 go build main.go
 go tool objdump main | grep  main.go:9
 # Output:
@@ -78,9 +78,9 @@ which means that it can only be referenced or used inside the `runtime` package 
 
 ## Conclusion
 
-* _goroutines_ are created by calling the `runtime.newproc`function;
-* The `runtime.newproc`function can only be called indirectly through a "go" statement, the compiler replaces the statement by a `runtime.newproc`call;
-* The `runtime.newproc`creates a _goroutine_ and places in a "waiting to run" queue.
+* _goroutines_ are created by calling the `runtime.newproc` function;
+* The `runtime.newproc` function can only be called indirectly through a "go" statement, the compiler replaces the statement by a `runtime.newproc` call;
+* The `runtime.newproc` creates a _goroutine_ and places in a "waiting to run" queue.
 
 
 [^1]: [https://golang.org/pkg/runtime/?m=all#newproc](https://golang.org/pkg/runtime/?m=all#newproc)
