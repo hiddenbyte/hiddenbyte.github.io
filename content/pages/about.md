@@ -1,7 +1,7 @@
 ---
 title: "About Me"
 date: 2020-05-02T14:13:55+01:00
-draft: true
+draft: false
 ---
 
 Mehul Irá, Software Developer. Currently works at Mindera, previously at:
