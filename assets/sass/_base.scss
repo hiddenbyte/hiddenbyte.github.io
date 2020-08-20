@@ -9,6 +9,7 @@ $title-color: $pallete-color-4;
 $link-color: $pallete-color-4;
 $font-stack: 'PT Serif', serif;
 $font-size: 20px;
+$sm-font-size: 14px;
 $max-width: 840px;
 
 body  {
@@ -23,7 +24,9 @@ body  {
     }
 
     footer {
+        font-size: 0.8em;
         margin-top: 10px;
+        border-top: 1px solid $pallete-color-2;
     }
 }
 
