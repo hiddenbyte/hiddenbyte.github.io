@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>hiddenbyte.log</title>
-    <link>http://mehul.pt/</link>
+    <link>https://mehul.pt/</link>
     <description>Recent content on hiddenbyte.log</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 05 Jul 2020 23:34:56 +0100</lastBuildDate>
     
-	<atom:link href="http://mehul.pt/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://mehul.pt/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Digging into Goroutines I</title>
-      <link>http://mehul.pt/posts/digging-into-goroutines-1/</link>
+      <link>https://mehul.pt/posts/digging-into-goroutines-1/</link>
       <pubDate>Sun, 05 Jul 2020 23:34:56 +0100</pubDate>
       
-      <guid>http://mehul.pt/posts/digging-into-goroutines-1/</guid>
+      <guid>https://mehul.pt/posts/digging-into-goroutines-1/</guid>
       <description>Go enables writing programs with concurrent threads of execution. And it does so by introducing the concept of goroutine.
  A goroutine has a simple model: it is a function executing concurrently with other goroutines in the same address space.
 in Effective Go
