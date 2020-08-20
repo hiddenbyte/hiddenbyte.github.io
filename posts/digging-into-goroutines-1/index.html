@@ -37,7 +37,7 @@
 </blockquote>
 <p>Before digging into goroutines, having an understanding on &ldquo;how&rdquo; the  <em>Go compiler</em> and <em>runtime</em> work together in order to launch a <em>goroutine</em> will pave the path to its internals.</p>
 <p>Note: the examples and tools used on this document are based on Go 1.12.9 (darwin/amd64 build).</p>
-<h2 id="launching-a-goroutine">Launching a goroutine</h2>
+<h3 id="launching-a-goroutine">Launching a goroutine</h3>
 <p>Launching a <em>goroutine</em> is just as simple as calling a function and can be achieved by writing a &ldquo;go&rdquo; statement.</p>
 <blockquote>
 <p>A &ldquo;go&rdquo; statement starts the execution of a function call as an independent concurrent thread of control, or goroutine, within the same address space.</p>
@@ -114,11 +114,11 @@ go tool objdump main | grep  main.go:9
 <li>and all the arguments of the function launched as a goroutine.</li>
 </ul>
 <p>At this point, we already know &ldquo;how&rdquo; the <em>Go compiler</em> and <em>runtime</em> work together to launch a <em>goroutine</em>: through the <em>runtime.newproc</em> function.</p>
-<h2 id="runtimenewproc">runtime.newproc</h2>
+<h3 id="runtimenewproc">runtime.newproc</h3>
 <p>The <code>runtime.newproc</code> function is part of the <code>runtime</code> package. Also the function name is &ldquo;unexported&rdquo;,
 which means that it can only be referenced or used inside the <code>runtime</code> package and it <strong>only can be called indirectly</strong> through a &ldquo;go&rdquo; statement.</p>
 <p><code>runtime.newproc</code> is <strong>responsible for creating a goroutine</strong>, which runs the provided function, and  <strong>placing it in a &ldquo;waiting to run goroutines&rdquo; queue.</strong></p>
-<h2 id="conclusion">Conclusion</h2>
+<h3 id="conclusion">Conclusion</h3>
 <ul>
 <li><em>goroutines</em> are created by calling the <code>runtime.newproc</code> function;</li>
 <li>The <code>runtime.newproc</code> function can only be called indirectly through a &ldquo;go&rdquo; statement, the compiler replaces the statement by a <code>runtime.newproc</code> call;</li>
