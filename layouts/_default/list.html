@@ -1,0 +1,17 @@
+{{ define "main" }}
+<table>
+    <thead>
+        <tr>
+            <th colspan="2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{ range .Paginator.Pages }}
+        <tr>
+            <td class="blog-date">{{ .Date.Format "January 2, 2006" }}</td>
+            <td class="blog-title"><a class="a--blog-title" href="{{ .Permalink }}">{{ .Title }}</a></td>
+        </tr>
+        {{ end }}
+    </tbody>
+</table>
+{{ end }}
