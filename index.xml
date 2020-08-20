@@ -23,5 +23,16 @@ in Effective Go
  Before digging into goroutines, having an understanding on &amp;ldquo;how&amp;rdquo; the Go compiler and runtime work together in order to launch a goroutine will pave the path to its internals.</description>
     </item>
     
+    <item>
+      <title>About Me</title>
+      <link>https://mehul.pt/pages/about/</link>
+      <pubDate>Sat, 02 May 2020 14:13:55 +0100</pubDate>
+      
+      <guid>https://mehul.pt/pages/about/</guid>
+      <description>Mehul Irá, Software Developer. Currently works at Mindera, previously at:
+ SAPO/Portugal Telecom (now Altice Portugal), 2012-2015; URBANOS, 2012; BOLD Int, 2012-2015; and agap2, 2010-2012.  You can also find him at:
+ https://github.com/hiddenbyte https://twitter.com/hiddenbyte https://www.linkedin.com/in/mehulira  About hiddenbyte.log Most of the log entries will be about Software Development.</description>
+    </item>
+    
   </channel>
 </rss>
