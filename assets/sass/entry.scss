@@ -1,0 +1,16 @@
+@import 'base';
+
+blockquote {
+    text-align: justify;
+    background-color: $pallete-color-2;
+}
+
+p {
+    text-align: justify;
+}
+
+code {
+    &.language-bash, &.language-go {
+        font-size: 14px;
+    }
+}

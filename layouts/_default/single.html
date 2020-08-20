@@ -1,7 +1,16 @@
 {{ define "title" }}
   {{ .Title }} &ndash; {{ .Site.Title }}
 {{ end }}
+
+{{ define "styles" }}
+{{ $entryStyle := resources.Get "sass/entry.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+<link type="text/css" href="{{ $entryStyle.Permalink }}" rel="stylesheet" >
+{{ end}}
+
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
+    <p>{{ .Date.Format "2006-01-02" }}</p>
+    <main>
+        <h2>{{ .Title }}</h2>
+        {{ .Content }}
+    </main>
 {{ end }}

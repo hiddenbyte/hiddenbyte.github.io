@@ -8,7 +8,7 @@
     <tbody>
         {{ range .Paginator.Pages }}
         <tr>
-            <td class="blog-date">{{ .Date.Format "January 2, 2006" }}</td>
+            <td class="blog-date">{{ .Date.Format "2006-01-02" }}</td>
             <td class="blog-title"><a class="a--blog-title" href="{{ .Permalink }}">{{ .Title }}</a></td>
         </tr>
         {{ end }}

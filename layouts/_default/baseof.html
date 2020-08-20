@@ -9,7 +9,10 @@
         {{ end }}
     </title>
     <link type="text/css" href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
-    <link type="text/css" href="/css/highlight/github-gist.css" rel="stylesheet" >
+    {{ block "styles" . }}
+        {{ $style := resources.Get "sass/index.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+        <link type="text/css" href="{{ $style.Permalink }}" rel="stylesheet" >
+    {{ end }}
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -17,17 +20,15 @@
         gtag('config', 'UA-165367789-1', { 'allow_ad_personalization_signals': false, 'anonymize_ip': true });
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165367789-1"></script>
-    <script src="/js/highlight/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
   </head>
   <body>
     <header>
         <h1><a href="https://mehul.pt">hiddenbyte.log</a></h1>
     </header>
-        {{ block "main" . }}
-        {{ end }}
-        {{ block "footer" . }}
-        {{ end }}
+    <main>
+    {{ block "main" . }}
+    {{ end }}
+    </main>
     <footer>
         Written by <a href="https://twitter.com/hiddenbyte" target="_blank">@hiddenbyte</a>
     </footer>

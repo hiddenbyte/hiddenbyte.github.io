@@ -1,7 +1,7 @@
 ---
 title: "Digging into Goroutines I"
 date: 2020-07-05T23:34:56+01:00
-draft: true
+draft: false
 ---
 
 Go enables writing programs with concurrent threads of execution. And it does so by introducing the concept of _goroutine_.
@@ -14,7 +14,7 @@ Before digging into goroutines, having an understanding on "how" the  _Go compil
 
 Note: the examples and tools used on this document are based on Go 1.12.9 (darwin/amd64 build).
   
-# Launching a goroutine
+## Launching a goroutine
 
 Launching a _goroutine_ is just as simple as calling a function and can be achieved by writing a "go" statement.
 
@@ -67,7 +67,7 @@ The `runtime.newproc` receives as function arguments:
 
 At this point, we already know "how" the _Go compiler_ and _runtime_ work together to launch a _goroutine_: through the _runtime.newproc_ function.
 
-# runtime.newproc
+## runtime.newproc
 
 
 The `runtime.newproc` function is part of the `runtime` package. Also the function name is "unexported",
@@ -76,7 +76,7 @@ which means that it can only be referenced or used inside the `runtime` package 
 
 `runtime.newproc` is __responsible for creating a goroutine__, which runs the provided function, and  __placing it in a "waiting to run goroutines" queue.__
 
-# Conclusion
+## Conclusion
 
 * _goroutines_ are created by calling the `runtime.newproc`function;
 * The `runtime.newproc`function can only be called indirectly through a "go" statement, the compiler replaces the statement by a `runtime.newproc`call;
