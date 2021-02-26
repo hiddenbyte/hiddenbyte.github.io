@@ -1,0 +1,54 @@
+/** Setting margins */       
+@page { 
+    margin: 2cm 
+}
+
+body  {
+    line-height: 1.3;
+    letter-spacing:0.2px; 
+    font: 12pt 'PT Serif', serif;
+    background: #fff !important;
+    color: #000;
+
+    header, main, footer {
+        max-width: unset;
+    }
+}
+
+header {
+    display: none;
+}
+
+footer {
+    display: none;
+}
+    
+h1 {
+    font-size: 24pt;
+    page-break-after: avoid; 
+    page-break-inside: avoid;
+}
+
+h2, h3, h4 {
+    color: #000;
+    margin-top: 25px;
+    margin-bottom: 0px;
+    page-break-after: avoid; 
+    page-break-inside: avoid;
+}
+    
+h2 {
+    font-size: 16pt;
+}
+
+h3 {
+    font-size: 14pt;
+}
+
+h4 {
+    font-size: 12pt;
+}
+
+ul, ol, dl { 
+    page-break-before:avoid;
+}

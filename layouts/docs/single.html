@@ -1,0 +1,18 @@
+{{ define "title" }}
+  {{ .Title }} {{ end }}
+
+{{ define "styles" }}
+
+{{ $entryStyle := resources.Get "sass/entry.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+<link type="text/css" href="{{ $entryStyle.Permalink }}" rel="stylesheet" >
+
+{{ $style1 := resources.Get "sass/docs/print.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+<link type="text/css" href="{{ $style1.Permalink }}" media="print" rel="stylesheet" >
+
+{{ end}}
+
+{{ define "main" }}
+  <main>
+    {{ .Content }}
+  </main>
+{{ end }}
