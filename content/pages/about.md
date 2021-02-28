@@ -4,14 +4,9 @@ date: 2020-05-02T14:13:55+01:00
 draft: false
 ---
 
-Mehul Irá, Software Developer.
+Mehul Irá, Software Developer. Currently working at [Mindera](https://mindera.com/).
 
-Currently working at [Mindera](https://mindera.com/), was previously at:
-
-* SAPO/Portugal Telecom (now Altice Portugal), 2012-2015;
-* URBANOS, 2012;
-* BOLD Int, 2012-2015;
-* and agap2, 2010-2012.
+For more details: [Curriculum Vitae](/docs/cv/).
 
 You can also find me at:
 
