@@ -8,52 +8,44 @@ draft: false
 
 ### Personal information
 
-Full name: **Mehul Sasikante Irá**
-
+Full name: **Mehul Sasikante Irá**  
 E-mail: **mehulira@protonmail.com**
 
 ### Work Experience
 
 #### Mindera
 
-Software Engineer. 
+Software Engineer. Since August 2015. **Currently here.**
 
-Since August 2015. **Currently here.**
+While working here, I've contributed with new features and fixes to several projects, that belongs to a Mindera client and/or tech partner, particularly in the Retail, Gambling, Gaming and SaaS business sectors. 
 
-Contributed into many projects of Mindera clients and/or tech partners in the following business sectors: Retail, Gambling and SaaS products.
-
-Technologies used while working here: Go, Java, Kotlin, Vert.x, Spring / Spring Boot, PostgreSQL and MySQL.
+**Technologies**: Go, Java, Kotlin, Vert.x, Spring Framework, Spring Boot, PostgreSQL and MySQL.
 
 #### Portugal Telecom (now Altice Portugal)
 
-Software Developer. 
+Software Engineer. From September 2012 to August 2015.
 
-From September 2012 to August 2015.
+As part of the **SAPO Desporto** development team, I have contributed with new features and fixes to a backend system responsible for sports statistical data (real-time statistics and statistics history); This system exposed the statistical data through a HTTP API that was consumed by several mobile and web apps within SAPO.  
+While working here, I was also part of the **Service Delivery Broker** development team for a short period of time.
 
-Contributed in the following projects:
-
-- Service Delivery Broker or SDB team;
-- Before  joining  the  SDB  team  I  was  under  SAPO  Desporto  team,  mainly  contributing  to  the backend component responsible for sports statistical data (near real-time sports statistics and statistics history).
+**Technologies:** .NET, C#, ASP .NET MVC | WebAPI, JS, HTML+CSS, MS SQL Server and NodeJS.
 
 #### URBANOS
 
-Software Engineer. 
+Software Engineer. From February 2012 to September 2012.
 
-From February 2012 to September 2012.
+While working here, I have contributed with new features and bug fixes to several web applications and mobile apps that were used internally by URBANOS to support their logistics service offers.
 
-Contributed with new features and bug fixes to web applications and mobile apps used by URBANOS to support their logistics service offers.
-
-Technologies used while working here: .NET, ASP .NET MVC, JS, HTML+CSS, MS SQL Server 2008 and Windows Mobile 6.1 (.NET CF).
+**Technologies:** .NET, C#, ASP .NET MVC, JS, HTML+CSS, MS SQL Server and Windows Mobile 6.1 (.NET CF).
 
 #### agap2
 
-Software Engineer. 
+Software Engineer. From October 2010 to February 2012.
 
-From October 2010 to February 2012.
+I have contributed with new features and fixes to an agap2 product, a human-resources management sofware.  
+As a consultant on behalf of agap2, I was part of an EAI development team at one of the main Portuguese telco companies. 
 
-As a software developer, I have developed new features and/or fixed bugs in the following projects/teams:
- - @corp by agap2. (worked w/: .NET 4.0, C#, ASP .NET MVC, SQL Server 2008, standard Web technologies);
- - EAI development team at one of the main Portuguese telco companies. (worked w/: TIBCO BW, TIBCO RV, SOAP Webservices).
+**Technologies:** .NET 4.0, C#, ASP .NET MVC, SQL Server, *standard Web technologies*, TIBCO BW, TIBCO RV and SOAP Webservices.
 
 ### Education
 
@@ -63,3 +55,7 @@ ISEL - Instituto Superior de Engenharia de Lisboa (Lisbon Superior Engineering I
 
 From September 2007 to September 2011.
 
+### Personal skills
+
+Mother tongues: **Portuguese** and **Gujarati**  
+Other language: **English**
