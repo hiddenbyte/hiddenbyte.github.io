@@ -4,9 +4,9 @@ date: 2021-03-29T21:50:33+01:00
 draft: true
 ---
 
-This post attempts to illustrate some basic aspects of a compiler, using the **bf-wasm**[^1] compiler as an example; and also share some of the design decisions I took while implementing **bf-wasm**.
+This post attempts to illustrate the basic aspects of a compiler, using the **bf-wasm**[^1] compiler as an example; and also share some of the design decisions I took while implementing **bf-wasm**.
 
-### bf-wasm compiler
+### bf-wasm
 
 bf-wasm is a Braincfuck compiler targeting WebAssembly. Written in Go.
 
@@ -32,7 +32,7 @@ TBW
 ### Semantic analysis
 TBW
 
-### Emit
+### WASM
 TBW
 
 [^1]: [https://github.com/hiddenbyte/bf-wasm](https://github.com/hiddenbyte/bf-wasm)

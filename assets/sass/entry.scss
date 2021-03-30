@@ -2,7 +2,10 @@
 
 blockquote {
     text-align: justify;
-    background-color: $pallete-color-2;
+    border-left-style: solid;
+    border-color: $pallete-color-6;
+    color: $pallete-color-6;
+    padding-left: 5px;
 }
 
 p {
