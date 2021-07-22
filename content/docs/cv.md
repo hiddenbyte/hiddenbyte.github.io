@@ -13,11 +13,17 @@ E-mail: **mehulira@protonmail.com**
 
 ### Work Experience
 
+#### Sky Technology Centre - Portugal
+
+Software Engineer. Since May 2021. **Currently here.**
+
+**Technologies**: Kotlin, Spring Framework, Spring Boot and Couchbase.
+
 #### Mindera
 
-Software Engineer. Since August 2015. **Currently here.**
+Software Engineer. From August 2015 to May 2021.
 
-While working here, I've contributed with new features and fixes to several projects, that belongs to a Mindera client and/or tech partner, particularly in the Retail, Gambling, Gaming and SaaS business sectors. 
+Worked with several tech partners and/or clients, as a Software Developer, helping them build backend solutions for the Retail, Gambling, Gaming and SaaS business sectors. 
 
 **Technologies**: Go, Java, Kotlin, Vert.x, Spring Framework, Spring Boot, PostgreSQL and MySQL.
 
@@ -25,7 +31,7 @@ While working here, I've contributed with new features and fixes to several proj
 
 Software Engineer. From September 2012 to August 2015.
 
-As part of the **SAPO Desporto** development team, I have contributed with new features and fixes to a backend system responsible for sports statistical data (real-time statistics and statistics history); This system exposed the statistical data through a HTTP API that was consumed by several mobile and web apps within SAPO.  
+As part of the **SAPO Desporto** development team, I contributed with new features and fixes to a backend system responsible for sports statistical data (real-time statistics and statistics history); This system exposed the statistical data through a HTTP API that was consumed by several mobile and web apps within SAPO.  
 While working here, I was also part of the **Service Delivery Broker** development team for a short period of time.
 
 **Technologies:** .NET, C#, ASP .NET MVC | WebAPI, JS, HTML+CSS, MS SQL Server and NodeJS.
@@ -34,7 +40,7 @@ While working here, I was also part of the **Service Delivery Broker** developme
 
 Software Engineer. From February 2012 to September 2012.
 
-While working here, I have contributed with new features and bug fixes to several web applications and mobile apps that were used internally by URBANOS to support their logistics service offers.
+As a Software Developer, I contributed with new features and bug fixes to several web applications and mobile apps that were used internally by URBANOS to support their logistics service offers.
 
 **Technologies:** .NET, C#, ASP .NET MVC, JS, HTML+CSS, MS SQL Server and Windows Mobile 6.1 (.NET CF).
 
@@ -42,7 +48,7 @@ While working here, I have contributed with new features and bug fixes to severa
 
 Software Engineer. From October 2010 to February 2012.
 
-I have contributed with new features and fixes to an agap2 product, a human-resources management sofware.  
+As a Software Developer, I contributed with new features and fixes to an agap2 product, a human-resources management sofware.  
 As a consultant on behalf of agap2, I was part of an EAI development team at one of the main Portuguese telco companies. 
 
 **Technologies:** .NET 4.0, C#, ASP .NET MVC, SQL Server, *standard Web technologies*, TIBCO BW, TIBCO RV and SOAP Webservices.

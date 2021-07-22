@@ -4,9 +4,7 @@ date: 2020-05-02T14:13:55+01:00
 draft: false
 ---
 
-Mehul Irá, Software Developer. Currently working at [Mindera](https://mindera.com/).
-
-For more details: [Curriculum Vitae](/docs/cv/).
+Mehul Irá, Software Developer. For more details: [Curriculum Vitae](/docs/cv/).
 
 You can also find me at:
 
