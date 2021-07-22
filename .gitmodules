@@ -1,4 +1,4 @@
 [submodule "public"]
 	path = public
-	url = https://github.com/hiddenbyte/hiddenbyte.github.io.git
+	url = git@github.com:hiddenbyte/hiddenbyte.github.io.git
 	branch = master
