@@ -54,6 +54,11 @@ ul, ol, dl {
 }
 
 /* TODO: Move these cv.md specific print styles below outta here */ 
+
 #urbanos {
     page-break-before: always;
+}
+
+h4 {
+    border-bottom: 1px solid #000;
 }

@@ -63,4 +63,5 @@ BSc - Information Systems and Computer Engineering.
 ### Personal skills
 
 Mother tongues: **Portuguese** and **Gujarati**
+
 Other language: **English**
