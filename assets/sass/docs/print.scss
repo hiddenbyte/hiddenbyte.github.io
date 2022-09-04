@@ -52,3 +52,8 @@ h4 {
 ul, ol, dl { 
     page-break-before:avoid;
 }
+
+/* TODO: Move these cv.md specific print styles below outta here */ 
+#urbanos {
+    page-break-before: always;
+}
