@@ -1,6 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docs on hiddenbyte.log</title><link>https://mehul.pt/docs/</link><description>Recent content in Docs on hiddenbyte.log</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 14 Jul 2022 23:03:55 +0100</lastBuildDate><atom:link href="https://mehul.pt/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>CV - Mehul Irá</title><link>https://mehul.pt/docs/cv/</link><pubDate>Thu, 14 Jul 2022 23:03:55 +0100</pubDate><guid>https://mehul.pt/docs/cv/</guid><description>Curriculum Vitae Software Engineer Full name: Mehul Sasikante Irá
-E-mail: mehulira@protonmail.com
-Work Experience Mindera Since January 2022 Technologies: Java, Spring Framework and Elasticsearch.
-From August 2015 to May 2021 Worked with several tech partners and/or clients, as a Software Developer, helping them build backend solutions for the Retail, Gambling, Gaming and SaaS business sectors.
-Technologies: Go, Java, Kotlin, Vert.x, Spring Framework, Spring Boot, PostgreSQL and MySQL.
-Sky Technology Centre - Portugal From May 2021 to December 2021 Technologies: Kotlin, Spring Framework, Spring Boot and Couchbase.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docs on hiddenbyte.log</title><link>https://mehul.pt/docs/</link><description>Recent content in Docs on hiddenbyte.log</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 14 Jul 2022 23:03:55 +0100</lastBuildDate><atom:link href="https://mehul.pt/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>CV - Mehul Irá</title><link>https://mehul.pt/docs/cv/</link><pubDate>Thu, 14 Jul 2022 23:03:55 +0100</pubDate><guid>https://mehul.pt/docs/cv/</guid><description>&lt;h2 id="curriculum-vitae">Curriculum Vitae&lt;/h2>
+&lt;h3 id="software-engineer">Software Engineer&lt;/h3>
+&lt;p>Full name: &lt;strong>Mehul Sasikante Irá&lt;/strong>&lt;br>
+E-mail: &lt;strong>&lt;a href="mailto:mehulira@protonmail.com">mehulira@protonmail.com&lt;/a>&lt;/strong>&lt;/p>
+&lt;h3 id="work-experience">Work Experience&lt;/h3>
+&lt;h4 id="mindera">Mindera&lt;/h4>
+&lt;h5 id="since-january-2022">Since January 2022&lt;/h5>
+&lt;p>&lt;strong>Technologies&lt;/strong>: Java, Spring Framework and Elasticsearch.&lt;/p>
+&lt;h5 id="from-august-2015-to-may-2021">From August 2015 to May 2021&lt;/h5>
+&lt;p>Worked with several tech partners and/or clients, as a Software Developer, helping them build backend solutions for the Retail, Gambling, Gaming and SaaS business sectors.&lt;/p>
+&lt;p>&lt;strong>Technologies&lt;/strong>: Go, Java, Kotlin, Vert.x, Spring Framework, Spring Boot, PostgreSQL and MySQL.&lt;/p>
+&lt;h4 id="sky-technology-centre---portugal">Sky Technology Centre - Portugal&lt;/h4>
+&lt;h5 id="from-may-2021-to-december-2021">From May 2021 to December 2021&lt;/h5>
+&lt;p>&lt;strong>Technologies&lt;/strong>: Kotlin, Spring Framework, Spring Boot and Couchbase.&lt;/p></description></item></channel></rss>
