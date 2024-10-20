@@ -1,10 +1,10 @@
 ---
-title: "hiddenbyte"
+title: "mehul"
 date: 2022-04-09T23:55:55+01:00
 draft: false
 ---
 
-Mehul Irá, Software Developer. For more details: [Curriculum Vitae](/docs/cv/).
+Mehul Sasikante Irá, Software Developer. For more details: [Curriculum Vitae](/docs/cv/).
 
 You can also find me at:
 
