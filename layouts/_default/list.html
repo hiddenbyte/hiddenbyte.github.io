@@ -1,17 +1,17 @@
 {{ define "main" }}
-<table>
-    <thead>
-        <tr>
-            <th colspan="2"></th>
-        </tr>
-    </thead>
-    <tbody>
-        {{ range where .Paginator.Pages "Section" "in" "posts" }}
-        <tr>
-            <td class="blog-date">{{ .Date.Format "2006-01-02" }}</td>
-            <td class="blog-title"><a class="a--blog-title" href="{{ .Permalink }}">{{ .Title }}</a></td>
-        </tr>
-        {{ end }}
-    </tbody>
-</table>
+
+{{ $pages := where site.RegularPages "Type" "posts" }}
+{{ $paginator := .Paginate ($pages.GroupByDate "Jan 2006") }}
+{{ range $paginator.PageGroups }}
+    <ul>
+        <li class="blog-date">{{ .Key }}
+            <ul>
+                {{ range .Pages }}
+                    <li class="blog-title"><a class="a--blog-title" href="{{ .Permalink }}">{{ .Title }}</a></li>
+                {{ end }}
+            </ul>
+        </li>    
+    </ul>
+{{ end }} 
+
 {{ end }}
