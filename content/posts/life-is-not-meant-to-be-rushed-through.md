@@ -1,5 +1,5 @@
 ---
-title: "life is not meant to be rushed through"
+title: "\"Life is not meant to be rushed through\""
 date: 2024-10-20T11:23:56+01:00
 draft: false
 ---
