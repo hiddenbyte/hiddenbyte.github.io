@@ -7,11 +7,11 @@
 {{ $pages := where site.RegularPages "Type" "posts" }}
 {{ $paginator := .Paginate ($pages.GroupByDate "Jan 2006") }}
 {{ range $paginator.PageGroups }}
-    <ul>
-        <li class="blog-date">{{ .Key }}
+    <ul class="blog-entries">
+        <li class="blog-entry-group">{{ .Key }}
             <ul>
                 {{ range .Pages }}
-                    <li class="blog-title"><a class="a--blog-title" href="{{ .Permalink }}">{{ .Title }}</a></li>
+                    <li class="blog-title"><span class="span--blog-date">{{ .Date | time.Format "02-01-2006" }}</span><a class="a--blog-title" href="{{ .Permalink }}">{{ .Title }}</a></li>
                 {{ end }}
             </ul>
         </li>    
