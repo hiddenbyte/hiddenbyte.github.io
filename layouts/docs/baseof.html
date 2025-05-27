@@ -10,7 +10,7 @@
     </title>
     <link type="text/css" href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
     {{ block "styles" . }}
-        {{ $style := resources.Get "sass/index.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+        {{ $style := resources.Get "sass/index.scss" | css.Sass | resources.Minify | resources.Fingerprint }}
         <link type="text/css" href="{{ $style.Permalink }}" rel="stylesheet" >
     {{ end }}
   </head>
