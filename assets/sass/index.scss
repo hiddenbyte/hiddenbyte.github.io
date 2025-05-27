@@ -1,12 +1,25 @@
 @import 'base';
 
-.blog-date {
+.blog-entries {
+  padding-inline-start: 0px;
+}
+
+.blog-entry-group {
     font-weight: lighter;
     color: $pallete-color-5;
     font-size: 1.0em;
+    list-style: none;
 }
 
 .blog-title {
     font-size: 0.9em;
     font-weight: bold;
+    list-style: none;
+}
+
+.span--blog-date {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: $pallete-color-5;
+    margin-right: 2px;
 }
