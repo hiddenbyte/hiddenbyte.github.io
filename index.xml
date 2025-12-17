@@ -1,27 +1,45 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>hiddenbyte.log</title><link>https://mehul.pt/</link><description>Recent content on hiddenbyte.log</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 15 Aug 2025 10:42:26 +0100</lastBuildDate><atom:link href="https://mehul.pt/index.xml" rel="self" type="application/rss+xml"/><item><title>10 years of Porto</title><link>https://mehul.pt/posts/porto-10-years/</link><pubDate>Fri, 15 Aug 2025 10:42:26 +0100</pubDate><guid>https://mehul.pt/posts/porto-10-years/</guid><description>&lt;p>This month marks 10 years since I moved to Porto, and I can say that this city feels like home.&lt;/p>
-&lt;p>This doesn’t mean I feel like a &lt;em>Tripeiro&lt;/em>, nor do I feel like an &lt;em>Alfacinha&lt;/em> (for those who know me, I was born and raised in Lisbon). Fuck, sometimes I don’t even feel like a Portuguese. But I definitely feel that I am at the right place 💙&lt;/p></description></item><item><title>Nostalgia</title><link>https://mehul.pt/posts/nostalgia/</link><pubDate>Sun, 20 Apr 2025 11:23:26 +0100</pubDate><guid>https://mehul.pt/posts/nostalgia/</guid><description>&lt;p>Nostalgia is counter to the natural flow of time. The arrow of time moves forward, yet nostalgia pulls us backward, creating resistance to the present and future. Thus, nostalgia is a feeling that is not in harmony with the natural flow of time.&lt;/p>
-&lt;p>This does not mean we should forget the past or any feelings, whether bad or good. But we should not become attached to the past—being attached to the past is what nostalgia is—and we should let go of the past.&lt;/p></description></item><item><title>"Life is not meant to be rushed through"</title><link>https://mehul.pt/posts/life-is-not-meant-to-be-rushed-through/</link><pubDate>Sun, 20 Oct 2024 11:23:56 +0100</pubDate><guid>https://mehul.pt/posts/life-is-not-meant-to-be-rushed-through/</guid><description>&lt;blockquote>
-&lt;p>life is not meant to be rushed through. It is not a race, nor is it a problem to be solved. It is an experience to be lived, and living well requires presence.&lt;/p>
-&lt;p>in &lt;a href="https://billwear.github.io/art-of-attention.html">the quiet art of attention&lt;/a>&lt;/p>&lt;/blockquote></description></item><item><title>CV - Mehul Sasikante Irá</title><link>https://mehul.pt/docs/cv/</link><pubDate>Thu, 14 Jul 2022 23:03:55 +0100</pubDate><guid>https://mehul.pt/docs/cv/</guid><description>&lt;h2 id="curriculum-vitae">Curriculum Vitae&lt;/h2>
-&lt;h3 id="software-engineer">Software Engineer&lt;/h3>
-&lt;p>Full name: &lt;strong>Mehul Sasikante Irá&lt;/strong>&lt;br>
-E-mail: &lt;strong>&lt;a href="mailto:mehulira@protonmail.com">mehulira@protonmail.com&lt;/a>&lt;/strong>&lt;/p>
-&lt;h3 id="work-experience">Work Experience&lt;/h3>
-&lt;h4 id="mindera">Mindera&lt;/h4>
-&lt;h5 id="since-january-2022">Since January 2022&lt;/h5>
-&lt;p>&lt;strong>Technologies&lt;/strong>: Java, Spring Framework and Elasticsearch.&lt;/p>
-&lt;h5 id="from-august-2015-to-may-2021">From August 2015 to May 2021&lt;/h5>
-&lt;p>Worked with several tech partners and/or clients, as a Software Developer, helping them build backend solutions for the Retail, Gambling, Gaming and SaaS business sectors.&lt;/p>
-&lt;p>&lt;strong>Technologies&lt;/strong>: Go, Java, Kotlin, Vert.x, Spring Framework, Spring Boot, PostgreSQL and MySQL.&lt;/p>
-&lt;h4 id="sky-technology-centre---portugal">Sky Technology Centre - Portugal&lt;/h4>
-&lt;h5 id="from-may-2021-to-december-2021">From May 2021 to December 2021&lt;/h5>
-&lt;p>&lt;strong>Technologies&lt;/strong>: Kotlin, Spring Framework, Spring Boot and Couchbase.&lt;/p></description></item><item><title>mehul</title><link>https://mehul.pt/pages/about/</link><pubDate>Sat, 09 Apr 2022 23:55:55 +0100</pubDate><guid>https://mehul.pt/pages/about/</guid><description>&lt;p>Mehul Sasikante Irá, Software Developer. For more details: &lt;a href="https://mehul.pt/docs/cv/">Curriculum Vitae&lt;/a>.&lt;/p>
-&lt;p>You can also find me at:&lt;/p>
-&lt;ul>
-&lt;li>&lt;a href="https://github.com/hiddenbyte">https://github.com/hiddenbyte&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.linkedin.com/in/mehulira">https://www.linkedin.com/in/mehulira&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Digging into Goroutines I</title><link>https://mehul.pt/posts/digging-into-goroutines-1/</link><pubDate>Sun, 05 Jul 2020 23:34:56 +0100</pubDate><guid>https://mehul.pt/posts/digging-into-goroutines-1/</guid><description>&lt;p>Go enables writing programs with concurrent threads of execution. And it does so by introducing the concept of &lt;em>goroutine&lt;/em>.&lt;/p>
-&lt;blockquote>
-&lt;p>A goroutine has a simple model: it is a function executing concurrently with other goroutines in the same address space.&lt;/p>
-&lt;p>in &lt;a href="https://golang.org/doc/effective_go.html#goroutines" title="Effective Go">Effective Go&lt;/a>&lt;/p>&lt;/blockquote>
-&lt;p>Before digging into goroutines, having an understanding on &amp;ldquo;how&amp;rdquo; the &lt;em>Go compiler&lt;/em> and &lt;em>runtime&lt;/em> work together in order to launch a &lt;em>goroutine&lt;/em> will pave the path to its internals.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>hiddenbyte.log</title><link>https://mehul.pt/</link><description>Recent content on hiddenbyte.log</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 17 Dec 2025 12:42:26 +0100</lastBuildDate><atom:link href="https://mehul.pt/index.xml" rel="self" type="application/rss+xml"/><item><title>One music album per day</title><link>https://mehul.pt/posts/one-music-album-per-day/</link><pubDate>Wed, 17 Dec 2025 12:42:26 +0100</pubDate><guid>https://mehul.pt/posts/one-music-album-per-day/</guid><description>&lt;p&gt;&lt;em&gt;&lt;strong&gt;Updated on: 17th of December of 2025&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;On a journey to listen a different music album on each day with the following rules:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The album of the day can be from any genre;&lt;/li&gt;
+&lt;li&gt;The album must be played sequentially and on repeat, as designed, no shuffle and no skipping tracks;&lt;/li&gt;
+&lt;li&gt;Album language rotates in a round-robin manner between English, Portuguese, and Hindi;
+&lt;ul&gt;
+&lt;li&gt;Albums in other languages are also allowed (e.g. Spanish).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="music-albums-listened-until-now"&gt;Music albums listened until now&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Day 3&lt;/strong&gt; - 17-12-2025 - &lt;a href="https://en.wikipedia.org/wiki/Rang_De_Basanti_(soundtrack)"&gt;Rang De Basanti - Soundtrack (2006)&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/A._R._Rahman"&gt;A. R. Rahnan&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Day 2&lt;/strong&gt; - 16-12-2025 - &lt;a href="https://pt.wikipedia.org/wiki/Anjo_da_Guarda_(%C3%A1lbum_de_Ant%C3%B3nio_Varia%C3%A7%C3%B5es)"&gt;Anjo da Guarda (1983)&lt;/a&gt;, &lt;a href="https://pt.wikipedia.org/wiki/Ant%C3%B3nio_Varia%C3%A7%C3%B5es"&gt;António Variações&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Day 1&lt;/strong&gt; - 15-12-2025 - &lt;a href="https://en.wikipedia.org/wiki/Gorillaz_(album)"&gt;Gorillaz (2001)&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/Gorillaz"&gt;Gorillaz&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>10 years of Porto</title><link>https://mehul.pt/posts/porto-10-years/</link><pubDate>Fri, 15 Aug 2025 10:42:26 +0100</pubDate><guid>https://mehul.pt/posts/porto-10-years/</guid><description>&lt;p&gt;This month marks 10 years since I moved to Porto, and I can say that this city feels like home.&lt;/p&gt;
+&lt;p&gt;This doesn’t mean I feel like a &lt;em&gt;Tripeiro&lt;/em&gt;, nor do I feel like an &lt;em&gt;Alfacinha&lt;/em&gt; (for those who know me, I was born and raised in Lisbon). Fuck, sometimes I don’t even feel like a Portuguese. But I definitely feel that I am at the right place 💙&lt;/p&gt;</description></item><item><title>Nostalgia</title><link>https://mehul.pt/posts/nostalgia/</link><pubDate>Sun, 20 Apr 2025 11:23:26 +0100</pubDate><guid>https://mehul.pt/posts/nostalgia/</guid><description>&lt;p&gt;Nostalgia is counter to the natural flow of time. The arrow of time moves forward, yet nostalgia pulls us backward, creating resistance to the present and future. Thus, nostalgia is a feeling that is not in harmony with the natural flow of time.&lt;/p&gt;
+&lt;p&gt;This does not mean we should forget the past or any feelings, whether bad or good. But we should not become attached to the past—being attached to the past is what nostalgia is—and we should let go of the past.&lt;/p&gt;</description></item><item><title>"Life is not meant to be rushed through"</title><link>https://mehul.pt/posts/life-is-not-meant-to-be-rushed-through/</link><pubDate>Sun, 20 Oct 2024 11:23:56 +0100</pubDate><guid>https://mehul.pt/posts/life-is-not-meant-to-be-rushed-through/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;life is not meant to be rushed through. It is not a race, nor is it a problem to be solved. It is an experience to be lived, and living well requires presence.&lt;/p&gt;
+&lt;p&gt;in &lt;a href="https://billwear.github.io/art-of-attention.html"&gt;the quiet art of attention&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>CV - Mehul Sasikante Irá</title><link>https://mehul.pt/docs/cv/</link><pubDate>Thu, 14 Jul 2022 23:03:55 +0100</pubDate><guid>https://mehul.pt/docs/cv/</guid><description>&lt;h2 id="curriculum-vitae"&gt;Curriculum Vitae&lt;/h2&gt;
+&lt;h3 id="software-engineer"&gt;Software Engineer&lt;/h3&gt;
+&lt;p&gt;Full name: &lt;strong&gt;Mehul Sasikante Irá&lt;/strong&gt;&lt;br&gt;
+E-mail: &lt;strong&gt;&lt;a href="mailto:mehulira@protonmail.com"&gt;mehulira@protonmail.com&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id="work-experience"&gt;Work Experience&lt;/h3&gt;
+&lt;h4 id="mindera"&gt;Mindera&lt;/h4&gt;
+&lt;h5 id="since-january-2022"&gt;Since January 2022&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;Technologies&lt;/strong&gt;: Java, Spring Framework and Elasticsearch.&lt;/p&gt;
+&lt;h5 id="from-august-2015-to-may-2021"&gt;From August 2015 to May 2021&lt;/h5&gt;
+&lt;p&gt;Worked with several tech partners and/or clients, as a Software Developer, helping them build backend solutions for the Retail, Gambling, Gaming and SaaS business sectors.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Technologies&lt;/strong&gt;: Go, Java, Kotlin, Vert.x, Spring Framework, Spring Boot, PostgreSQL and MySQL.&lt;/p&gt;
+&lt;h4 id="sky-technology-centre---portugal"&gt;Sky Technology Centre - Portugal&lt;/h4&gt;
+&lt;h5 id="from-may-2021-to-december-2021"&gt;From May 2021 to December 2021&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;Technologies&lt;/strong&gt;: Kotlin, Spring Framework, Spring Boot and Couchbase.&lt;/p&gt;</description></item><item><title>mehul</title><link>https://mehul.pt/pages/about/</link><pubDate>Sat, 09 Apr 2022 23:55:55 +0100</pubDate><guid>https://mehul.pt/pages/about/</guid><description>&lt;p&gt;Mehul Sasikante Irá, Software Developer. For more details: &lt;a href="https://mehul.pt/docs/cv/"&gt;Curriculum Vitae&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can also find me at:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/hiddenbyte"&gt;https://github.com/hiddenbyte&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.linkedin.com/in/mehulira"&gt;https://www.linkedin.com/in/mehulira&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Digging into Goroutines I</title><link>https://mehul.pt/posts/digging-into-goroutines-1/</link><pubDate>Sun, 05 Jul 2020 23:34:56 +0100</pubDate><guid>https://mehul.pt/posts/digging-into-goroutines-1/</guid><description>&lt;p&gt;Go enables writing programs with concurrent threads of execution. And it does so by introducing the concept of &lt;em&gt;goroutine&lt;/em&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A goroutine has a simple model: it is a function executing concurrently with other goroutines in the same address space.&lt;/p&gt;
+&lt;p&gt;in &lt;a href="https://golang.org/doc/effective_go.html#goroutines" title="Effective Go"&gt;Effective Go&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Before digging into goroutines, having an understanding on &amp;ldquo;how&amp;rdquo; the &lt;em&gt;Go compiler&lt;/em&gt; and &lt;em&gt;runtime&lt;/em&gt; work together in order to launch a &lt;em&gt;goroutine&lt;/em&gt; will pave the path to its internals.&lt;/p&gt;</description></item></channel></rss>
