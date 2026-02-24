@@ -5,7 +5,7 @@ draft: false
 ---
 ***Updated on: 24th of February of 2026***
 
-***Edit 1: Title changed from  "One music album per day" to  "One music album per day"***
+***Edit 1: Title changed from  "One music album per day" to  "One music album per week"***
 
 On a journey to listen a different music album on each week with the following rules:
 
