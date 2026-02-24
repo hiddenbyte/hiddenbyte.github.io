@@ -9,7 +9,7 @@ draft: false
 
 On a journey to listen a different music album on each week with the following rules:
 
-- The album of the day can be from any genre;
+- The album of the week can be from any genre;
 - The album must be played sequentially and on repeat, as designed, no shuffle and no skipping tracks;
 - Album language rotates in a round-robin manner between English, Portuguese, and Hindi;
 	- Albums in other languages are also allowed (e.g. Spanish).
