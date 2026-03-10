@@ -17,6 +17,7 @@ On a journey to listen a different music album on each week with the following r
 
 ## Music albums listened until now
 
+*   **Week 3** - 09-03-2026 - Nayaab (2022), Seedhe Maut
 *   **Week 2** - 02-03-2026 -  Nó na Orelha (2011), Criolo
 *   **Week 1** - 23-02-2026 -  [In Search of... (2001)](https://en.wikipedia.org/wiki/In_Search_of..._(N.E.R.D._album)), [N.E.R.D.](https://en.wikipedia.org/wiki/N.E.R.D.)
 *  **Day 3** - 17-12-2025 -  [Rang De Basanti - Soundtrack (2006)](https://en.wikipedia.org/wiki/Rang_De_Basanti_(soundtrack)), [A. R. Rahnan](https://en.wikipedia.org/wiki/A._R._Rahman)
