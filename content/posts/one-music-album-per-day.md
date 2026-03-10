@@ -3,7 +3,7 @@ title: "One music album per week"
 date: 2025-12-17T12:42:26+01:00
 draft: false
 ---
-***Updated on: 2nd of March of 2026***
+***Updated on: 10th of March of 2026***
 
 ***24/02/26 Edit 1: Change from "One music album per day" to "One music album per week"***
 
