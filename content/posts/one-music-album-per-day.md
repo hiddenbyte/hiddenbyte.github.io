@@ -23,3 +23,4 @@ On a journey to listen a different music album on each week with the following r
 *  **Day 3** - 17-12-2025 -  [Rang De Basanti - Soundtrack (2006)](https://en.wikipedia.org/wiki/Rang_De_Basanti_(soundtrack)), [A. R. Rahnan](https://en.wikipedia.org/wiki/A._R._Rahman)
 *  **Day 2** - 16-12-2025 - [Anjo da Guarda (1983)](https://pt.wikipedia.org/wiki/Anjo_da_Guarda_(%C3%A1lbum_de_Ant%C3%B3nio_Varia%C3%A7%C3%B5es)), [António Variações](https://pt.wikipedia.org/wiki/Ant%C3%B3nio_Varia%C3%A7%C3%B5es)
 *  **Day 1** - 15-12-2025 - [Gorillaz (2001)](https://en.wikipedia.org/wiki/Gorillaz_(album)), [Gorillaz](https://en.wikipedia.org/wiki/Gorillaz)
+*  **Week** - 16-03-2024 - Nayaab (2022), [Seedhe Maut](https://en.wikipedia.org/wiki/Seedhe_Maut)
