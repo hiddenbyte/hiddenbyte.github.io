@@ -17,6 +17,7 @@ On a journey to listen a different music album on each week with the following r
 
 ## Music albums listened until now
 
+*   **Week 4** - 16-03-2026 - Nayaab (2022), [Seedhe Maut](https://en.wikipedia.org/wiki/Seedhe_Maut)
 *   **Week 3** - 09-03-2026 - Nayaab (2022), [Seedhe Maut](https://en.wikipedia.org/wiki/Seedhe_Maut)
 *   **Week 2** - 02-03-2026 -  [Nó na Orelha (2011)](https://pt.wikipedia.org/wiki/Nó_na_Orelha), [Criolo](https://en.wikipedia.org/wiki/Criolo)
 *   **Week 1** - 23-02-2026 -  [In Search of... (2001)](https://en.wikipedia.org/wiki/In_Search_of..._(N.E.R.D._album)), [N.E.R.D.](https://en.wikipedia.org/wiki/N.E.R.D.)
