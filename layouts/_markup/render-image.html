@@ -4,30 +4,44 @@
 {{- if $src -}}
   {{- /* 1. Fix Rotation First */ -}}
   {{- $img := $src.Filter (images.AutoOrient) -}}
-  
-  {{- /* 2. Generate the srcset */ -}}
-  {{- $srcset := slice -}}
+
+  {{- /* 2. Detect first image for LCP optimization */ -}}
+  {{- $imgCount := .Page.Scratch.Get "imgCount" | default 0 -}}
+  {{- $isFirst := eq $imgCount 0 -}}
+  {{- .Page.Scratch.Set "imgCount" (add $imgCount 1) -}}
+
+  {{- /* 3. Generate WebP and original-format srcsets */ -}}
+  {{- $srcsetWebP := slice -}}
+  {{- $srcsetOrig := slice -}}
   {{- range $respSizes -}}
     {{- if lt (int .) $img.Width -}}
-      {{- $resized := $img.Resize (printf "%sx webp" .) -}}
-      {{- $srcset = $srcset | append (printf "%s %sw" $resized.RelPermalink .) -}}
+      {{- $srcsetWebP = $srcsetWebP | append (printf "%s %sw" ($img.Resize (printf "%sx webp" .)).RelPermalink .) -}}
+      {{- $srcsetOrig = $srcsetOrig | append (printf "%s %sw" ($img.Resize (printf "%sx" .)).RelPermalink .) -}}
     {{- end -}}
   {{- end -}}
-  
-  {{- /* 3. Fallback/Default image */ -}}
-  {{- $placeholder := $img.Resize "1080x webp" -}}
 
-  <img 
-    src="{{ $placeholder.RelPermalink }}"
-    srcset="{{ delimit $srcset ", " }}"
-    sizes="(min-width: 1080px) 1080px, 100vw"
-    {{ with .Text }}alt="{{ . }}"{{ end }}
-    loading="lazy"
-    decoding="async"
-    width="{{ $img.Width }}"
-    height="{{ $img.Height }}"
-    style="height: auto; max-width: 100%;"
-  >
+  {{- /* 4. Fallback/Default image (original format) */ -}}
+  {{- $fallbackOrig := $img.Resize "1080x" -}}
+
+  <picture>
+    <source
+      type="image/webp"
+      srcset="{{ delimit $srcsetWebP ", " }}"
+      sizes="(min-width: 1080px) 1080px, 100vw"
+    >
+    <img
+      src="{{ $fallbackOrig.RelPermalink }}"
+      srcset="{{ delimit $srcsetOrig ", " }}"
+      sizes="(min-width: 1080px) 1080px, 100vw"
+      {{ with .Text }}alt="{{ . }}"{{ end }}
+      loading="{{ if $isFirst }}eager{{ else }}lazy{{ end }}"
+      {{ if $isFirst }}fetchpriority="high"{{ end }}
+      decoding="{{ if $isFirst }}auto{{ else }}async{{ end }}"
+      width="{{ $img.Width }}"
+      height="{{ $img.Height }}"
+      style="height: auto; max-width: 100%;"
+    >
+  </picture>
 {{- else -}}
   <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" loading="lazy">
 {{- end -}}
