@@ -1,5 +1,5 @@
 ---
-title: ".march.2026.photo.dump"
+title: "march.2026.photo.dump"
 date: 2026-04-01T14:13:33+01:00
 draft: false
 ---
