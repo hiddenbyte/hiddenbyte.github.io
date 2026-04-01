@@ -27,12 +27,12 @@
     <source
       type="image/webp"
       srcset="{{ delimit $srcsetWebP ", " }}"
-      sizes="(min-width: 1080px) 1080px, 100vw"
+      sizes="(min-width: 840px) 840px, 100vw"
     >
     <img
       src="{{ $fallbackOrig.RelPermalink }}"
       srcset="{{ delimit $srcsetOrig ", " }}"
-      sizes="(min-width: 1080px) 1080px, 100vw"
+      sizes="(min-width: 840px) 840px, 100vw"
       {{ with .Text }}alt="{{ . }}"{{ end }}
       loading="{{ if $isFirst }}eager{{ else }}lazy{{ end }}"
       {{ if $isFirst }}fetchpriority="high"{{ end }}
