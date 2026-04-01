@@ -15,3 +15,8 @@ p {
 .highlight {
     font-size: $code-font-size;
 }
+
+img {
+    width: 100%;
+    object-fit: cover;
+}
