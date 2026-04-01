@@ -1,7 +1,7 @@
 ---
 title: "One music album per week"
 date: 2025-12-17T12:42:26+01:00
-draft: false
+draft: true
 ---
 ***Updated on: 17th of March of 2026***
 

@@ -7,6 +7,7 @@ draft: false
 ![](/posts/march.2026.photo.dump/IMG_20260301_092857725.jpg)
 ![](/posts/march.2026.photo.dump/IMG_20260307_182013607.jpg)
 ![](/posts/march.2026.photo.dump/IMG_20260308_125356727.jpg)
+![](/posts/march.2026.photo.dump/IMG_20260313_224647772.jpg)
 ![](/posts/march.2026.photo.dump/IMG_20260315_101055249.jpg)
 ![](/posts/march.2026.photo.dump/IMG_20260318_141540177.jpg)
 ![](/posts/march.2026.photo.dump/IMG_20260320_181130189.jpg)
