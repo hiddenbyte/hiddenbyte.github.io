@@ -1,0 +1,23 @@
+{{- $respSizes := slice "480" "720" "1080" -}}
+{{- $src := .Page.Resources.GetMatch .Destination -}}
+
+{{- if $src -}}
+  {{- /* Use AutoOrient to fix the rotation before resizing */ -}}
+  {{- $img := $src.Filter (images.AutoOrient) -}}
+  
+  {{- /* Now perform your resize/convert to WebP */ -}}
+  {{- $final := $img.Resize "1080x webp" -}}
+  
+  <img 
+    src="{{ $img.RelPermalink }}"
+    {{ with .Text }}alt="{{ . }}"{{ end }}
+    {{ with .Title }}title="{{ . }}"{{ end }}
+    loading="lazy"
+    decoding="async"
+    width="{{ $src.Width }}"
+    height="{{ $src.Height }}"
+  >
+{{- else -}}
+  {{- /* Fallback for external URLs or missing files */ -}}
+  <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" loading="lazy">
+{{- end -}}
