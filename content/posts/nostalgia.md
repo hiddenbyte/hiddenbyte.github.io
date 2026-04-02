@@ -2,6 +2,7 @@
 title: "Nostalgia"
 date: 2025-04-20T11:23:26+01:00
 draft: false
+tags: ["essay"]
 ---
 Nostalgia is counter to the natural flow of time. The arrow of time moves forward, yet nostalgia pulls us backward, creating resistance to the present and future. Thus, nostalgia is a feeling that is not in harmony with the natural flow of time.
 

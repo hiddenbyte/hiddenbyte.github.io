@@ -8,7 +8,7 @@
 {{ end}}
 
 {{ define "main" }}
-    <p>{{ .Date.Format "2006-01-02" }}</p>
+    <p>{{ .Date.Format "2006-01-02" }}{{ range .GetTerms "tags" }} <a class="tag" href="{{ .Permalink }}">{{ .LinkTitle }}</a>{{ end }}</p>
     <main>
         <h2>{{ .Title }}</h2>
         {{ .Content }}
