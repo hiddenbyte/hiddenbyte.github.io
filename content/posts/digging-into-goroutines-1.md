@@ -2,7 +2,7 @@
 title: "Digging into Goroutines I"
 date: 2020-07-05T23:34:56+01:00
 draft: false
-tags: ["tech"]
+tags: ["software"]
 ---
 
 Go enables writing programs with concurrent threads of execution. And it does so by introducing the concept of _goroutine_.

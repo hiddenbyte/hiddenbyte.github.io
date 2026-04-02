@@ -11,11 +11,12 @@
 
 {{ $pages := .Pages }}
 {{ $paginator := .Paginate $pages }}
-<p class="tag-heading">#{{ .Title }}</p>
-<ul class="blog-entries">
-    {{ range $paginator.Pages }}
-        <li class="blog-title"><span class="span--blog-date">{{ .Date | time.Format "02-01-2006" }}</span><a class="a--blog-title" href="{{ .Permalink }}">{{ .Title }}</a></li>
-    {{ end }}
-</ul>
-
+<main>
+    <h2>#{{ .Title }}</h2>
+    <ul class="blog-entries">
+        {{ range $paginator.Pages }}
+            <li class="blog-title"><span class="span--blog-date">{{ .Date | time.Format "02-01-2006" }}</span><a class="a--blog-title" href="{{ .Permalink }}">{{ .Title }}</a></li>
+        {{ end }}
+    </ul>
+</main>
 {{ end }}
