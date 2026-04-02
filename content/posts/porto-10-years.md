@@ -2,6 +2,7 @@
 title: "10 years of Porto"
 date: 2025-08-15T10:42:26+01:00
 draft: false
+tags: ["essay"]
 ---
 
 This month marks 10 years since I moved to Porto, and I can say that this city feels like home. 

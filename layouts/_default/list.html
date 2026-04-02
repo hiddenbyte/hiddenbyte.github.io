@@ -11,7 +11,7 @@
         <li class="blog-entry-group">{{ .Key }}
             <ul>
                 {{ range .Pages }}
-                    <li class="blog-title"><span class="span--blog-date">{{ .Date | time.Format "02-01-2006" }}</span><a class="a--blog-title" href="{{ .Permalink }}">{{ .Title }}</a></li>
+                    <li class="blog-title"><span class="span--blog-date">{{ .Date | time.Format "02-01-2006" }}</span><a class="a--blog-title" href="{{ .Permalink }}">{{ .Title }}</a>{{ range .GetTerms "tags" }} <a class="tag" href="{{ .Permalink }}">{{ .LinkTitle }}</a>{{ end }}</li>
                 {{ end }}
             </ul>
         </li>    

@@ -1,3 +1,6 @@
 baseURL = "https://mehul.pt/"
 languageCode = "en-us"
-title = "hiddenbyte.log"    
+title = "hiddenbyte.log"
+
+[taxonomies]
+  tag = "tags"

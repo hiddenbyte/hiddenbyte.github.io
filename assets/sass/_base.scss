@@ -46,3 +46,25 @@ h2, h3, h4, h5, th {
 a {
     color: $link-color;
 }
+
+.tag {
+    font-size: 0.65em;
+    font-weight: normal;
+    color: $pallete-color-4;
+    border: 1px solid $pallete-color-4;
+    border-radius: 3px;
+    padding: 1px 5px;
+    text-decoration: none;
+    vertical-align: middle;
+
+    &:hover {
+        background-color: $pallete-color-4;
+        color: $pallete-color-1;
+    }
+}
+
+.tag-heading {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: $pallete-color-5;
+}
