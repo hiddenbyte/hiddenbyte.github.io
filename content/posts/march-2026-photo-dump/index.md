@@ -1,5 +1,5 @@
 ---
-title: "Some slices of time time from March '26"
+title: "Some slices of time from March '26"
 date: 2026-04-01T14:13:33+01:00
 draft: false
 tags: ["photography"]
