@@ -1,0 +1,43 @@
+name: Post to Instagram
+
+on:
+  workflow_dispatch:
+    inputs:
+      post_path:
+        description: 'Blog post URL path (e.g. posts/my-blog-post)'
+        required: true
+        type: string
+
+jobs:
+  post-to-instagram:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-instagram
+
+      - name: Install Python dependencies
+        run: pip install -r .github/scripts/requirements.txt
+
+      - name: Install Playwright browsers
+        run: playwright install chromium --with-deps
+
+      - name: Post to Instagram
+        env:
+          INSTAGRAM_USERNAME: ${{ secrets.INSTAGRAM_USERNAME }}
+          INSTAGRAM_PASSWORD: ${{ secrets.INSTAGRAM_PASSWORD }}
+          # Optional: base64-encoded instagrapi session JSON to avoid repeated logins
+          INSTAGRAM_SESSION_JSON: ${{ secrets.INSTAGRAM_SESSION_JSON }}
+          # Optional: TOTP secret if 2FA is enabled on the account
+          INSTAGRAM_TOTP_SECRET: ${{ secrets.INSTAGRAM_TOTP_SECRET }}
+        run: python .github/scripts/instagram_post.py "${{ inputs.post_path }}"
