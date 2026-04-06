@@ -8,6 +8,11 @@ on:
         required: true
         type: string
 
+# Required secrets:
+#   INSTAGRAM_USER_ID      — numeric Instagram user ID (find at graph.instagram.com/me?fields=id&access_token=TOKEN)
+#   INSTAGRAM_ACCESS_TOKEN — long-lived token (valid 60 days; refresh with the instagram-token-refresh workflow)
+#   CLOUDINARY_URL         — cloudinary://API_KEY:API_SECRET@CLOUD_NAME  (free tier is enough)
+
 jobs:
   post-to-instagram:
     runs-on: ubuntu-latest
@@ -24,7 +29,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-instagram
+          key: ${{ runner.os }}-pip-instagram-graph
 
       - name: Install Python dependencies
         run: pip install -r .github/scripts/requirements.txt
@@ -34,10 +39,7 @@ jobs:
 
       - name: Post to Instagram
         env:
-          INSTAGRAM_USERNAME: ${{ secrets.INSTAGRAM_USERNAME }}
-          INSTAGRAM_PASSWORD: ${{ secrets.INSTAGRAM_PASSWORD }}
-          # Optional: base64-encoded instagrapi session JSON to avoid repeated logins
-          INSTAGRAM_SESSION_JSON: ${{ secrets.INSTAGRAM_SESSION_JSON }}
-          # Optional: TOTP secret if 2FA is enabled on the account
-          INSTAGRAM_TOTP_SECRET: ${{ secrets.INSTAGRAM_TOTP_SECRET }}
+          INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          CLOUDINARY_URL: ${{ secrets.CLOUDINARY_URL }}
         run: python .github/scripts/instagram_post.py "${{ inputs.post_path }}"

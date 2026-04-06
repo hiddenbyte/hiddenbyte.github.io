@@ -1,0 +1,38 @@
+name: Refresh Instagram Token
+
+# Long-lived Instagram tokens expire after 60 days.
+# This workflow refreshes the token every 50 days (before expiry) and prints
+# the new token so you can update the INSTAGRAM_ACCESS_TOKEN secret.
+#
+# To update the secret automatically you can add a PAT with `secrets:write`
+# permission as REPO_PAT and uncomment the "Update secret" step below.
+
+on:
+  schedule:
+    - cron: '0 9 1 */2 *'   # 9 AM on the 1st of every other month (~50-day cadence)
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refresh long-lived token
+        id: refresh
+        run: |
+          RESPONSE=$(curl -sf \
+            "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${{ secrets.INSTAGRAM_ACCESS_TOKEN }}")
+          echo "Response: $RESPONSE"
+          NEW_TOKEN=$(echo "$RESPONSE" | python3 -c "import sys,json; print(json.load(sys.stdin)['access_token'])")
+          echo "new_token=$NEW_TOKEN" >> "$GITHUB_OUTPUT"
+          EXPIRES=$(echo "$RESPONSE" | python3 -c "import sys,json; print(json.load(sys.stdin).get('expires_in','?'))")
+          echo "Token refreshed. Expires in ${EXPIRES} seconds."
+
+      # Uncomment below and add a PAT secret (REPO_PAT) with repo+secrets:write
+      # to update the secret automatically instead of doing it manually.
+      #
+      # - name: Update INSTAGRAM_ACCESS_TOKEN secret
+      #   env:
+      #     GH_TOKEN: ${{ secrets.REPO_PAT }}
+      #   run: |
+      #     echo "${{ steps.refresh.outputs.new_token }}" | \
+      #       gh secret set INSTAGRAM_ACCESS_TOKEN --repo ${{ github.repository }}

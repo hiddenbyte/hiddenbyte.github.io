@@ -1,27 +1,37 @@
 #!/usr/bin/env python3
-"""Post a blog entry to Instagram: a feed photo and a story with a link sticker."""
+"""Post a blog entry to Instagram via the official Graph API.
 
-import base64
-import json
+Feed post  — screenshot (1080×1080) + title / URL / hashtags caption.
+Story      — screenshot (1080×1920) + link sticker pointing to the post URL.
+
+Required environment variables:
+    INSTAGRAM_USER_ID       Numeric IG user ID.
+    INSTAGRAM_ACCESS_TOKEN  Long-lived OAuth access token (expires in 60 days).
+    CLOUDINARY_URL          cloudinary://API_KEY:API_SECRET@CLOUD_NAME
+                            Used to host screenshots so the Graph API can fetch them.
+"""
+
 import os
 import sys
 import time
 from pathlib import Path
 
+import cloudinary
+import cloudinary.uploader
 import frontmatter
-from instagrapi import Client
-from instagrapi.types import StoryLink
+import requests
 from playwright.sync_api import sync_playwright
 
 BASE_URL = "https://mehul.pt"
 CONTENT_DIR = Path("content")
+GRAPH_URL = "https://graph.instagram.com/v21.0"
 
 FEED_IMG = Path("/tmp/ig_feed.jpg")
 STORY_IMG = Path("/tmp/ig_story.jpg")
 
 
 # ---------------------------------------------------------------------------
-# Helpers
+# Blog helpers
 # ---------------------------------------------------------------------------
 
 def resolve_post(post_path: str) -> tuple[Path, str]:
@@ -42,10 +52,22 @@ def resolve_post(post_path: str) -> tuple[Path, str]:
 
 def read_post_meta(md_path: Path) -> tuple[str, list[str]]:
     post = frontmatter.load(str(md_path))
-    title: str = post.get("title", "")
-    tags: list[str] = post.get("tags", [])
-    return title, tags
+    return post.get("title", ""), post.get("tags", [])
 
+
+def build_caption(title: str, url: str, tags: list[str]) -> str:
+    lines = [title, "", url]
+    if tags:
+        hashtags = " ".join(
+            f"#{t.replace(' ', '').replace('-', '')}" for t in tags
+        )
+        lines += ["", hashtags]
+    return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Screenshots
+# ---------------------------------------------------------------------------
 
 def take_screenshot(url: str, output: Path, width: int, height: int) -> None:
     with sync_playwright() as p:
@@ -62,50 +84,60 @@ def take_screenshot(url: str, output: Path, width: int, height: int) -> None:
     print(f"  Saved {output} ({width}×{height})")
 
 
-def build_caption(title: str, url: str, tags: list[str]) -> str:
-    lines = [title, "", url]
-    if tags:
-        hashtags = " ".join(
-            f"#{t.replace(' ', '').replace('-', '')}" for t in tags
-        )
-        lines += ["", hashtags]
-    return "\n".join(lines)
+# ---------------------------------------------------------------------------
+# Cloudinary — host screenshots so the Graph API can fetch them
+# ---------------------------------------------------------------------------
+
+def upload_to_cloudinary(path: Path) -> str:
+    """Upload an image and return its public HTTPS URL."""
+    # CLOUDINARY_URL env var is picked up automatically by the SDK
+    result = cloudinary.uploader.upload(
+        str(path),
+        resource_type="image",
+        overwrite=True,
+        public_id=f"blog-ig/{path.stem}",
+    )
+    return result["secure_url"]
 
 
 # ---------------------------------------------------------------------------
-# Instagram
+# Instagram Graph API
 # ---------------------------------------------------------------------------
 
-def instagram_client() -> Client:
-    cl = Client()
+def _post(endpoint: str, **data) -> dict:
+    token = os.environ["INSTAGRAM_ACCESS_TOKEN"]
+    resp = requests.post(
+        f"{GRAPH_URL}/{endpoint}",
+        data={**data, "access_token": token},
+        timeout=30,
+    )
+    try:
+        resp.raise_for_status()
+    except requests.HTTPError:
+        raise RuntimeError(f"Graph API error: {resp.text}") from None
+    return resp.json()
 
-    # Restore a cached session when available (avoids login challenges)
-    session_b64 = os.environ.get("INSTAGRAM_SESSION_JSON", "")
-    if session_b64:
-        try:
-            session = json.loads(base64.b64decode(session_b64))
-            cl.set_settings(session)
-            cl.get_timeline_feed()  # probe — raises if session expired
-            print("Session restored from INSTAGRAM_SESSION_JSON.")
-            return cl
-        except Exception as exc:
-            print(f"Cached session invalid ({exc}), falling back to login.")
 
-    username = os.environ["INSTAGRAM_USERNAME"]
-    password = os.environ["INSTAGRAM_PASSWORD"]
-    totp_secret = os.environ.get("INSTAGRAM_TOTP_SECRET", "")
+def create_feed_container(user_id: str, image_url: str, caption: str) -> str:
+    data = _post(f"{user_id}/media", image_url=image_url, caption=caption)
+    return data["id"]
 
-    print(f"Logging in as {username}…")
-    if totp_secret:
-        cl.login(
-            username,
-            password,
-            verification_code=cl.totp_generate_code(totp_secret),
-        )
-    else:
-        cl.login(username, password)
 
-    return cl
+def create_story_container(user_id: str, image_url: str, link_url: str) -> str:
+    data = _post(
+        f"{user_id}/media",
+        media_type="STORIES",
+        image_url=image_url,
+        link_sticker=f'{{"link_url":"{link_url}"}}',
+    )
+    return data["id"]
+
+
+def publish_container(user_id: str, container_id: str) -> str:
+    # Instagram requires a short delay between container creation and publishing
+    time.sleep(5)
+    data = _post(f"{user_id}/media_publish", creation_id=container_id)
+    return data["id"]
 
 
 # ---------------------------------------------------------------------------
@@ -117,6 +149,7 @@ def main() -> None:
         print("Usage: instagram_post.py <post_path>", file=sys.stderr)
         sys.exit(1)
 
+    user_id = os.environ["INSTAGRAM_USER_ID"]
     post_path = sys.argv[1]
     md_path, post_url = resolve_post(post_path)
     title, tags = read_post_meta(md_path)
@@ -125,25 +158,35 @@ def main() -> None:
     print(f"URL   : {post_url}")
     print(f"Tags  : {tags}")
 
-    # --- Screenshots -------------------------------------------------------
+    # Screenshots
     print("\nTaking screenshots…")
-    take_screenshot(post_url, FEED_IMG, width=1080, height=1080)   # 1:1 feed
-    take_screenshot(post_url, STORY_IMG, width=1080, height=1920)  # 9:16 story
+    take_screenshot(post_url, FEED_IMG, width=1080, height=1080)
+    take_screenshot(post_url, STORY_IMG, width=1080, height=1920)
+
+    # Upload to Cloudinary to get public URLs for the Graph API
+    print("\nUploading to Cloudinary…")
+    feed_url = upload_to_cloudinary(FEED_IMG)
+    story_url = upload_to_cloudinary(STORY_IMG)
+    print(f"  Feed  : {feed_url}")
+    print(f"  Story : {story_url}")
 
     caption = build_caption(title, post_url, tags)
     print(f"\nCaption:\n{caption}\n")
 
-    # --- Instagram ---------------------------------------------------------
-    cl = instagram_client()
+    # Post via Graph API
+    print("Creating feed media container…")
+    feed_container = create_feed_container(user_id, feed_url, caption)
 
-    print("Uploading feed post…")
-    cl.photo_upload(str(FEED_IMG), caption)
+    print("Creating story media container…")
+    story_container = create_story_container(user_id, story_url, post_url)
 
-    print("Uploading story with link sticker…")
-    cl.photo_upload_to_story(
-        str(STORY_IMG),
-        links=[StoryLink(webUri=post_url)],
-    )
+    print("Publishing feed post…")
+    feed_id = publish_container(user_id, feed_container)
+    print(f"  Published feed post: {feed_id}")
+
+    print("Publishing story…")
+    story_id = publish_container(user_id, story_container)
+    print(f"  Published story: {story_id}")
 
     print("\nDone!")
 
