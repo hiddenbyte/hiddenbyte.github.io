@@ -1,0 +1,170 @@
+name: Post to Instagram via Buffer
+
+on:
+  workflow_dispatch:
+    inputs:
+      resource_path:
+        description: 'Blog post resource path (e.g. posts/porto-10-years)'
+        required: true
+        type: string
+
+jobs:
+  post-to-instagram:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Extract post metadata
+        id: meta
+        run: |
+          RESOURCE_PATH="${{ inputs.resource_path }}"
+          RESOURCE_PATH="${RESOURCE_PATH#/}"
+
+          FILE_PATH="content/${RESOURCE_PATH}.md"
+          if [ ! -f "$FILE_PATH" ]; then
+            echo "::error::Post file not found: ${FILE_PATH}"
+            exit 1
+          fi
+
+          TITLE=$(grep -m1 '^title:' "$FILE_PATH" | sed 's/^title:[[:space:]]*//' | tr -d '"')
+          URL="https://mehul.pt/${RESOURCE_PATH}"
+
+          echo "title=${TITLE}" >> "$GITHUB_OUTPUT"
+          echo "url=${URL}" >> "$GITHUB_OUTPUT"
+          echo "title: ${TITLE}"
+          echo "url: ${URL}"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Playwright
+        run: |
+          npm install playwright
+          npx playwright install chromium --with-deps
+
+      - name: Capture feed screenshot (1080x1080)
+        run: |
+          node << 'EOF'
+          const { chromium } = require('playwright');
+          (async () => {
+            const browser = await chromium.launch();
+            const page = await browser.newPage();
+            await page.setViewportSize({ width: 1080, height: 1080 });
+            await page.goto(process.env.POST_URL, { waitUntil: 'networkidle', timeout: 30000 });
+            await page.screenshot({ path: 'feed.png' });
+            await browser.close();
+            console.log('Feed screenshot saved (1080x1080)');
+          })();
+          EOF
+        env:
+          POST_URL: ${{ steps.meta.outputs.url }}
+
+      - name: Capture story screenshot (1080x1920)
+        run: |
+          node << 'EOF'
+          const { chromium } = require('playwright');
+          (async () => {
+            const browser = await chromium.launch();
+            const page = await browser.newPage();
+            await page.setViewportSize({ width: 1080, height: 1920 });
+            await page.goto(process.env.POST_URL, { waitUntil: 'networkidle', timeout: 30000 });
+            await page.screenshot({ path: 'story.png' });
+            await browser.close();
+            console.log('Story screenshot saved (1080x1920)');
+          })();
+          EOF
+        env:
+          POST_URL: ${{ steps.meta.outputs.url }}
+
+      - name: Upload screenshots to imgbb
+        id: images
+        env:
+          IMGBB_API_KEY: ${{ secrets.IMGBB_API_KEY }}
+        run: |
+          upload() {
+            local file=$1
+            local response
+            response=$(curl -s -X POST "https://api.imgbb.com/1/upload" \
+              -F "key=${IMGBB_API_KEY}" \
+              -F "image=@${file}")
+            echo "$response" | python3 -c '
+import sys, json
+d = json.load(sys.stdin)
+if not d.get("success"):
+    print("Upload failed:", d, file=sys.stderr)
+    sys.exit(1)
+print(d["data"]["url"])
+'
+          }
+
+          FEED_URL=$(upload "feed.png")
+          echo "feed_url=${FEED_URL}" >> "$GITHUB_OUTPUT"
+          echo "Feed image URL: ${FEED_URL}"
+
+          STORY_URL=$(upload "story.png")
+          echo "story_url=${STORY_URL}" >> "$GITHUB_OUTPUT"
+          echo "Story image URL: ${STORY_URL}"
+
+      - name: Post feed to Instagram via Buffer
+        env:
+          BUFFER_ACCESS_TOKEN: ${{ secrets.BUFFER_ACCESS_TOKEN }}
+          BUFFER_INSTAGRAM_PROFILE_ID: ${{ secrets.BUFFER_INSTAGRAM_PROFILE_ID }}
+          FEED_IMG_URL: ${{ steps.images.outputs.feed_url }}
+          POST_TITLE: ${{ steps.meta.outputs.title }}
+          POST_URL: ${{ steps.meta.outputs.url }}
+        run: |
+          CAPTION="${POST_TITLE}
+
+${POST_URL}"
+
+          RESPONSE=$(curl -s -X POST "https://api.bufferapp.com/1/updates/create.json" \
+            --data-urlencode "access_token=${BUFFER_ACCESS_TOKEN}" \
+            --data-urlencode "profile_ids[]=${BUFFER_INSTAGRAM_PROFILE_ID}" \
+            --data-urlencode "text=${CAPTION}" \
+            --data-urlencode "media[photo]=${FEED_IMG_URL}" \
+            -d "now=true")
+
+          echo "Buffer feed response: ${RESPONSE}"
+          echo "$RESPONSE" | python3 -c '
+import sys, json
+d = json.load(sys.stdin)
+if d.get("success"):
+    print("Feed post created successfully")
+else:
+    print("Error creating feed post:", d, file=sys.stderr)
+    sys.exit(1)
+'
+
+      - name: Post story to Instagram via Buffer
+        env:
+          BUFFER_ACCESS_TOKEN: ${{ secrets.BUFFER_ACCESS_TOKEN }}
+          BUFFER_INSTAGRAM_PROFILE_ID: ${{ secrets.BUFFER_INSTAGRAM_PROFILE_ID }}
+          STORY_IMG_URL: ${{ steps.images.outputs.story_url }}
+          POST_TITLE: ${{ steps.meta.outputs.title }}
+          POST_URL: ${{ steps.meta.outputs.url }}
+        run: |
+          CAPTION="${POST_TITLE}
+
+${POST_URL}"
+
+          RESPONSE=$(curl -s -X POST "https://api.bufferapp.com/1/updates/create.json" \
+            --data-urlencode "access_token=${BUFFER_ACCESS_TOKEN}" \
+            --data-urlencode "profile_ids[]=${BUFFER_INSTAGRAM_PROFILE_ID}" \
+            --data-urlencode "text=${CAPTION}" \
+            --data-urlencode "media[photo]=${STORY_IMG_URL}" \
+            -d "instagram[instagram_type]=story" \
+            -d "now=true")
+
+          echo "Buffer story response: ${RESPONSE}"
+          echo "$RESPONSE" | python3 -c '
+import sys, json
+d = json.load(sys.stdin)
+if d.get("success"):
+    print("Story created successfully")
+else:
+    print("Error creating story:", d, file=sys.stderr)
+    sys.exit(1)
+'
