@@ -63,7 +63,7 @@ variables = {
 
 payload = json.dumps({"query": mutation, "variables": variables}).encode()
 req = urllib.request.Request(
-    "https://api.buffer.com",
+    "https://api.buffer.com/graphql",
     data=payload,
     headers={
         "Content-Type": "application/json",
