@@ -93,11 +93,11 @@ jobs:
             echo "$response" | python3 .github/scripts/imgbb_upload.py
           }
 
-          FEED_URL=$(upload "feed.png")
+          FEED_URL=$(upload "feed.png") || { echo "::error::Failed to upload feed.png to imgbb"; exit 1; }
           echo "feed_url=${FEED_URL}" >> "$GITHUB_OUTPUT"
           echo "Feed image URL: ${FEED_URL}"
 
-          STORY_URL=$(upload "story.png")
+          STORY_URL=$(upload "story.png") || { echo "::error::Failed to upload story.png to imgbb"; exit 1; }
           echo "story_url=${STORY_URL}" >> "$GITHUB_OUTPUT"
           echo "Story image URL: ${STORY_URL}"
 
