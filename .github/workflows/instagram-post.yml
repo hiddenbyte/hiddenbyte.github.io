@@ -90,7 +90,7 @@ jobs:
             response=$(curl -s -X POST "https://api.imgbb.com/1/upload" \
               -F "key=${IMGBB_API_KEY}" \
               -F "image=@${file}")
-            echo "$response" | python3 -c "import sys,json;d=json.load(sys.stdin);d.get('success') or (print('Upload failed:',d,file=sys.stderr),sys.exit(1));print(d['data']['url'])"
+            echo "$response" | python3 .github/scripts/imgbb_upload.py
           }
 
           FEED_URL=$(upload "feed.png")
@@ -105,140 +105,16 @@ jobs:
         env:
           BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
           BUFFER_CHANNEL_ID: ${{ secrets.BUFFER_CHANNEL_ID }}
-          FEED_IMG_URL: ${{ steps.images.outputs.feed_url }}
+          IMG_URL: ${{ steps.images.outputs.feed_url }}
           POST_TITLE: ${{ steps.meta.outputs.title }}
           POST_URL: ${{ steps.meta.outputs.url }}
-        run: |
-          python3 << 'EOF'
-          import json, os, sys, urllib.request
-
-          caption = f"{os.environ['POST_TITLE']}\n\n{os.environ['POST_URL']}"
-
-          mutation = """
-          mutation CreateFeedPost($input: CreatePostInput!) {
-            createPost(input: $input) {
-              ... on PostActionSuccess {
-                post {
-                  id
-                  dueAt
-                }
-              }
-              ... on MutationError {
-                message
-                extensions {
-                  code
-                }
-              }
-            }
-          }
-          """
-
-          variables = {
-            "input": {
-              "channelId": os.environ["BUFFER_CHANNEL_ID"],
-              "text": caption,
-              "assets": {
-                "images": [os.environ["FEED_IMG_URL"]]
-              },
-              "schedulingType": "automatic",
-              "mode": "addToQueue",
-              "metadata": {
-                "instagram": {
-                  "type": "post"
-                }
-              }
-            }
-          }
-
-          payload = json.dumps({"query": mutation, "variables": variables}).encode()
-          req = urllib.request.Request(
-            "https://api.buffer.com",
-            data=payload,
-            headers={
-              "Content-Type": "application/json",
-              "Authorization": f"Bearer {os.environ['BUFFER_API_KEY']}"
-            }
-          )
-
-          with urllib.request.urlopen(req) as resp:
-            data = json.loads(resp.read())
-
-          print("Response:", json.dumps(data, indent=2))
-          result = data.get("data", {}).get("createPost", {})
-          if "post" in result:
-            print(f"Feed post created: {result['post']['id']}")
-          else:
-            print("Error creating feed post:", data, file=sys.stderr)
-            sys.exit(1)
-          EOF
+        run: python3 .github/scripts/buffer_post.py feed
 
       - name: Post story to Instagram via Buffer GraphQL
         env:
           BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
           BUFFER_CHANNEL_ID: ${{ secrets.BUFFER_CHANNEL_ID }}
-          STORY_IMG_URL: ${{ steps.images.outputs.story_url }}
+          IMG_URL: ${{ steps.images.outputs.story_url }}
           POST_TITLE: ${{ steps.meta.outputs.title }}
           POST_URL: ${{ steps.meta.outputs.url }}
-        run: |
-          python3 << 'EOF'
-          import json, os, sys, urllib.request
-
-          caption = f"{os.environ['POST_TITLE']}\n\n{os.environ['POST_URL']}"
-
-          mutation = """
-          mutation CreateStoryPost($input: CreatePostInput!) {
-            createPost(input: $input) {
-              ... on PostActionSuccess {
-                post {
-                  id
-                  dueAt
-                }
-              }
-              ... on MutationError {
-                message
-                extensions {
-                  code
-                }
-              }
-            }
-          }
-          """
-
-          variables = {
-            "input": {
-              "channelId": os.environ["BUFFER_CHANNEL_ID"],
-              "text": caption,
-              "assets": {
-                "images": [os.environ["STORY_IMG_URL"]]
-              },
-              "schedulingType": "automatic",
-              "mode": "addToQueue",
-              "metadata": {
-                "instagram": {
-                  "type": "story"
-                }
-              }
-            }
-          }
-
-          payload = json.dumps({"query": mutation, "variables": variables}).encode()
-          req = urllib.request.Request(
-            "https://api.buffer.com",
-            data=payload,
-            headers={
-              "Content-Type": "application/json",
-              "Authorization": f"Bearer {os.environ['BUFFER_API_KEY']}"
-            }
-          )
-
-          with urllib.request.urlopen(req) as resp:
-            data = json.loads(resp.read())
-
-          print("Response:", json.dumps(data, indent=2))
-          result = data.get("data", {}).get("createPost", {})
-          if "post" in result:
-            print(f"Story created: {result['post']['id']}")
-          else:
-            print("Error creating story:", data, file=sys.stderr)
-            sys.exit(1)
-          EOF
+        run: python3 .github/scripts/buffer_post.py story
