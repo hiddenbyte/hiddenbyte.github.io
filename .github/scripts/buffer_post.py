@@ -15,6 +15,7 @@ Required environment variables:
 import json
 import os
 import sys
+import urllib.error
 import urllib.request
 
 post_type = sys.argv[1]
@@ -44,6 +45,9 @@ mutation {mutation_name}($input: CreatePostInput!) {{
 }}
 """
 
+# Buffer's instagram type for feed posts is "post", not "feed"
+instagram_type = "post" if post_type == "feed" else "story"
+
 variables = {
     "input": {
         "channelId": os.environ["BUFFER_CHANNEL_ID"],
@@ -55,7 +59,7 @@ variables = {
         "mode": "addToQueue",
         "metadata": {
             "instagram": {
-                "type": post_type
+                "type": instagram_type
             }
         }
     }
@@ -71,8 +75,14 @@ req = urllib.request.Request(
     }
 )
 
-with urllib.request.urlopen(req) as resp:
-    data = json.loads(resp.read())
+try:
+    with urllib.request.urlopen(req) as resp:
+        data = json.loads(resp.read())
+except urllib.error.HTTPError as e:
+    body = e.read().decode("utf-8", errors="replace")
+    print(f"HTTP {e.code} {e.reason}", file=sys.stderr)
+    print("Response body:", body, file=sys.stderr)
+    sys.exit(1)
 
 print("Response:", json.dumps(data, indent=2))
 result = data.get("data", {}).get("createPost", {})
