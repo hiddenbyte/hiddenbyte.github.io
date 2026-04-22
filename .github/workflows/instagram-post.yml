@@ -21,14 +21,39 @@ jobs:
           RESOURCE_PATH="${{ inputs.resource_path }}"
           RESOURCE_PATH="${RESOURCE_PATH#/}"
 
-          FILE_PATH="content/${RESOURCE_PATH}.md"
-          if [ ! -f "$FILE_PATH" ]; then
-            echo "::error::Post file not found: ${FILE_PATH}"
+          URL="https://mehul.pt/${RESOURCE_PATH}"
+
+          TITLE=$(curl -s "${URL}" | python3 << 'PYEOF'
+import sys
+from html.parser import HTMLParser
+
+class H2Parser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.in_h2 = False
+        self.title = ''
+        self.found = False
+    def handle_starttag(self, tag, attrs):
+        if tag == 'h2' and not self.found:
+            self.in_h2 = True
+    def handle_data(self, data):
+        if self.in_h2:
+            self.title += data
+    def handle_endtag(self, tag):
+        if tag == 'h2' and self.in_h2:
+            self.in_h2 = False
+            self.found = True
+
+p = H2Parser()
+p.feed(sys.stdin.read())
+print(p.title.strip())
+PYEOF
+          )
+
+          if [ -z "${TITLE}" ]; then
+            echo "::error::Failed to extract title from live page: ${URL}"
             exit 1
           fi
-
-          TITLE=$(grep -m1 '^title:' "$FILE_PATH" | sed 's/^title:[[:space:]]*//' | tr -d '"')
-          URL="https://mehul.pt/${RESOURCE_PATH}"
 
           echo "title=${TITLE}" >> "$GITHUB_OUTPUT"
           echo "url=${URL}" >> "$GITHUB_OUTPUT"
