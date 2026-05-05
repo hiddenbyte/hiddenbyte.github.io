@@ -53,6 +53,21 @@ a {
     color: $link-color;
 }
 
+$tag-software-color: #0077c0;
+$tag-essay-color: #b85c00;
+$tag-quote-color: #7b2d8b;
+$tag-photography-color: #2a7d45;
+
+@mixin tag-color($color) {
+    color: $color;
+    border-color: $color;
+
+    &:hover {
+        background-color: $color;
+        color: $pallete-color-1;
+    }
+}
+
 .tag {
     font-size: 0.65em;
     font-weight: normal;
@@ -68,6 +83,11 @@ a {
         color: $pallete-color-1;
     }
 }
+
+.tag--software     { @include tag-color($tag-software-color); }
+.tag--essay        { @include tag-color($tag-essay-color); }
+.tag--quote        { @include tag-color($tag-quote-color); }
+.tag--photography  { @include tag-color($tag-photography-color); }
 
 .tag-heading {
     font-size: 1.2em;
