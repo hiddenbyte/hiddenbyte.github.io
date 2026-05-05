@@ -5,6 +5,8 @@ draft: false
 tags: ["photography"]
 ---
 
+The following photos were taken during March of 2026.
+
 ![](IMG_20260301_092857725.jpg)
 ![](IMG_20260307_182013607.jpg)
 ![](IMG_20260308_125356727.jpg)
