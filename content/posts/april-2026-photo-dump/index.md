@@ -11,7 +11,7 @@ The following photos were taken during April of 2026.
 *Alameda Dom Afonso Henriques, Lisbon*
 
 ![](IMG_20260410_191338313.jpg)
-*Near Praça da Républica, Porto*
+*Near Praça da República, Porto*
 
 ![](IMG_20260412_150212907.jpg)
 *Jardim das Virtudes, Porto*
@@ -23,7 +23,7 @@ The following photos were taken during April of 2026.
 *Senhora do Vau Trail, Amarante*
 
 ![](IMG_20260421_084313184.jpg)
-*Praça da Républica, Porto*
+*Praça da República, Porto*
 
 ![](IMG_20260425_081352296.jpg)
 *Pedra Má, Arouca*
