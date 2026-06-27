@@ -1,0 +1,13 @@
+{{ $src := .Get "src" }}
+{{ $title := .Get "title" }}
+{{ $resource := .Page.Resources.GetMatch $src }}
+{{ if $resource }}
+  {{ $src = $resource.RelPermalink }}
+{{ end }}
+<figure class="audio-player">
+  {{ with $title }}<figcaption>{{ . }}</figcaption>{{ end }}
+  <audio controls preload="metadata">
+    <source src="{{ $src }}">
+    Your browser does not support the audio element.
+  </audio>
+</figure>

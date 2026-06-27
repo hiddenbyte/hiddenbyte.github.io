@@ -21,3 +21,17 @@ img {
     object-fit: cover;
     transition: transform 0.3s ease;
 }
+
+.audio-player {
+    margin: 1.5rem 0;
+
+    audio {
+        width: 100%;
+    }
+
+    figcaption {
+        font-size: 0.85em;
+        color: $pallete-color-6;
+        margin-bottom: 0.4rem;
+    }
+}
