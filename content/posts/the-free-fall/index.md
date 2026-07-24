@@ -13,3 +13,4 @@ Perhaps we just need to give in to this free fall in order to fully live?
 
 
 ![](IMG_20251209_120648740.jpg)
+*Landscape View from Mount Pico, Ilha do Pico, Azores*
