@@ -1,0 +1,5 @@
+# One stay per line, in trip order: the first is the night before setting off,
+# each line after that is the overnight at the end of a walking day.
+# Name, address..., Portugal, Town, PT, Latitude <lat>, Longitude <lon>, <maps url>
+Casa da Cristina, Rua do Soberco N°27, 2450-237 Nazaré, Portugal, Nazaré, PT, Latitude 39.6027253682474, Longitude -9.07353489092576, https://maps.app.goo.gl/Gpb8jwTUBaXtwUat8
+Singer's Lounge, Rua 5 de Outubro nº16, 2480-306 Porto de Mós, Portugal, Porto de Mós, PT, Latitude 39.6009169351252, Longitude -8.819164832651, https://maps.app.goo.gl/fZvJrqsXPquowBqF7

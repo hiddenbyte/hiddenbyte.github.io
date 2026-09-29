@@ -1,0 +1,4 @@
+# One leg per line, in trip order. Terminal is where that leg departs from.
+# When, Mode, From - To, depart > arrive, Terminal, Latitude <lat>, Longitude <lon>, <maps url>
+Day before, Bus, Porto - Nazaré, 18h00 > 20h40, TIC Campanhã, Latitude 41.1516444, Longitude -8.5828547, https://maps.app.goo.gl/mkYZMZJ5XyknXDpE7
+Last day of the hike, Bus, Fátima - Porto, 16h40 > 19h00, Fátima Bus Station, Latitude 39.6313043, Longitude -8.6803975, https://maps.app.goo.gl/JKDT7oGSA5B34ERk8
