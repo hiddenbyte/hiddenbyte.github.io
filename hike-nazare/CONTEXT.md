@@ -112,9 +112,18 @@ grouped under `Day before / Day 1 / Day 2`.
   call, no filename escaping and the page works opened as a local file.
 - **No blog header or "Written by" footer**, by request — this page is not presented as part
   of the blog. The `<title>` is just "Caminho da Nazaré".
-- Styling mirrors the tokens in `assets/sass/_base.scss`: PT Serif, `#fafafa` background,
-  `#1d242b` text, `#6f6b6b` muted, `#dfdfdf` rules, `#0077c0` accent, 840 px max-width. Day
-  palette is `#0077c0, #b85c00, #2a7d45, #7b2d8b`, taken from the site's tag colours.
+- **The page deliberately does not use the blog's look** (by request). It has its own
+  field-guide design: Archivo (condensed 800 for the title and day headings) with IBM Plex
+  Mono for figures, a cool limestone ground, waymark-blue accent. Map tiles are standard OpenStreetMap: OpenTopoMap was tried
+  and rejected by the user.
+  All colours are CSS tokens on `:root` with a dark-mode set. The day palette is
+  `--day1..--day4` (Atlantic blue, Serra ochre, green, purple); the script reads them with
+  `getComputedStyle`, so change colours in the CSS only. Map furniture (tooltips, pins) stays
+  light in both themes because the tiles are light.
+- On wide screens (≥ 900 px) the itinerary and map sit side by side with the map sticky, so
+  the key stays next to what it explains. Below that it stacks in the original order.
+- The **stage strip** under the title is drawn to scale: each day's bar is flexed by its
+  distance and each stop is placed at its km, all from the same `DAYS`/`edges` data.
 - The GPX download link stays `encodeURIComponent`'d even though the filename is now ASCII.
 
 ## How to verify changes without a browser
@@ -134,7 +143,7 @@ cat build/stub.js /tmp/page.js > /tmp/run.js
 
 Things worth asserting, all of which held at the last change: 6 timeline entries in
 chronological order across 3 groups; per-day distances summing to 56.0 km; the two
-polylines sharing their junction point exactly; 4 profile paths with no `NaN`; 2 stay
+polylines sharing their junction point exactly; 4 profile paths with no `NaN`; a 2-bar stage strip with 3 stops; 2 stay
 markers + 2 terminal pins; map bounds at 3359 points (route + stays + the *near* terminal
 only); and a regex sweep finding no dates.
 

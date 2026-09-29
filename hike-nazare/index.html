@@ -6,219 +6,323 @@
 <title>Caminho da Nazaré</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <style>
+  /* Field-guide route card: a stage strip drawn to scale up top, then the
+     itinerary beside a sticky topo map (the itinerary is the map key), then
+     the elevation profile full width. Cool limestone ground, waymark blue. */
   :root {
-    --bg: #fafafa;
-    --fg: #1d242b;
-    --muted: #6f6b6b;
-    --rule: #dfdfdf;
-    --accent: #0077c0;
-    --day1: #0077c0;
-    --day2: #b85c00;
+    --ground: #edf0ee;
+    --paper: #f8faf9;
+    --ink: #14232f;
+    --muted: #59676d;
+    --rule: #cdd5d2;
+    --accent: #1c5fa6;
+    --day1: #1f6fb3;   /* Atlantic */
+    --day2: #b3701a;   /* Serra de Aire limestone ochre */
+    --day3: #4b7b38;
+    --day4: #7c4892;
+    --display: 'Archivo', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+    --body: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+    --data: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
   }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0f171c; --paper: #16212a; --ink: #e2e8e5; --muted: #95a3a8;
+      --rule: #2b3a44; --accent: #6ea9ea;
+      --day1: #4f9be0; --day2: #d99a47; --day3: #7fb266; --day4: #b684cc;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0f171c; --paper: #16212a; --ink: #e2e8e5; --muted: #95a3a8;
+    --rule: #2b3a44; --accent: #6ea9ea;
+    --day1: #4f9be0; --day2: #d99a47; --day3: #7fb266; --day4: #b684cc;
+    color-scheme: dark;
+  }
+
   * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
   body {
     margin: 0;
-    padding: 0 16px;
-    background: var(--bg);
-    color: var(--fg);
-    font-family: 'PT Serif', serif;
-    font-size: 20px;
+    padding: 0 20px;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--body);
+    font-variation-settings: 'wdth' 100;
+    font-size: 16px;
     line-height: 1.5;
   }
-  main, footer { margin: 0 auto; max-width: 840px; }
-  footer {
-    margin-top: 15px;
-    padding: 10px 0 24px;
-    border-top: 1px solid var(--rule);
-    font-size: 0.85em;
-  }
-  a { color: var(--accent); }
-  h2 { color: var(--accent); margin-bottom: 0.2em; padding-top: 28px; }
-  h3 {
-    color: var(--fg);
-    font-size: 0.8em;
-    letter-spacing: 0.04em;
+  .page { max-width: 1120px; margin: 0 auto; padding-block: 40px 32px; }
+  a { color: var(--accent); text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+  .num { font-family: var(--data); font-variant-numeric: tabular-nums; }
+
+  /* ---- header ---- */
+  .eyebrow {
+    margin: 0 0 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    margin: 26px 0 8px;
+    color: var(--muted);
   }
-  .sub { margin-top: 0; color: var(--muted); font-size: 0.8em; }
+  h1 {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 800;
+    font-stretch: 68%;
+    font-variation-settings: 'wdth' 68;
+    font-size: clamp(2.8rem, 8vw, 5.4rem);
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+  .lede { margin: 14px 0 0; max-width: 34em; font-size: 1.12rem; color: var(--muted); }
+
+  /* stage strip: each day's width is its share of the distance */
+  .stages { margin: 34px 0 0; }
+  .stage-bar { display: flex; gap: 3px; height: 10px; }
+  .stage-bar span { border-radius: 2px; min-width: 0; }
+  .stage-stops { position: relative; height: 3.4em; margin-top: 8px; }
+  .stop {
+    position: absolute; top: 0;
+    display: flex; flex-direction: column;
+    white-space: nowrap;
+    transform: translateX(-50%); text-align: center;
+  }
+  .stop:first-child { transform: none; text-align: left; }
+  .stop:last-child { transform: translateX(-100%); text-align: right; }
+  .stop b { font-weight: 700; font-size: 0.98rem; }
+  .stop .num { font-size: 0.78rem; color: var(--muted); }
+
+  .stats {
+    display: flex; flex-wrap: wrap; gap: 10px 36px;
+    margin: 22px 0 0; padding: 16px 0 0;
+    border-top: 1px solid var(--rule);
+  }
+  .stats div { display: flex; flex-direction: column; }
+  .stats dt {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .stats dd { margin: 2px 0 0; font-family: var(--data); font-size: 1.3rem; font-weight: 500; }
+
+  /* ---- sections ---- */
+  h2 {
+    display: flex; align-items: center; gap: 12px;
+    margin: 0 0 14px;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink);
+  }
+  h2::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+  .plan {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+    margin-top: 48px;
+  }
+  @media (min-width: 900px) {
+    .plan { grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 44px; align-items: start; }
+    .route-col { position: sticky; top: 20px; }
+    #map { height: min(640px, calc(100vh - 110px)); }
+  }
 
   #map {
     width: 100%;
-    height: 460px;
+    height: 440px;
     border: 1px solid var(--rule);
-    border-radius: 3px;
-    background: #eee;
+    border-radius: 6px;
+    background: var(--paper);
+    z-index: 0;
   }
+  .map-note { margin: 8px 0 0; font-size: 0.8rem; color: var(--muted); }
 
-
-  /* totals */
-  .stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 28px;
-    margin: 10px 0 0;
-    padding: 0;
-    list-style: none;
-    font-size: 0.8em;
-  }
-  .stats dt { color: var(--muted); font-size: 0.85em; }
-  .stats dd { margin: 0 0 8px; font-variant-numeric: tabular-nums; }
-
-
-
-  /* itinerary timeline: one spine, markers echoing the map symbols */
-  #timeline { position: relative; margin-top: 4px; }
+  /* ---- itinerary: one spine, markers echoing the map symbols ---- */
+  #timeline { position: relative; }
   #timeline::before {
     content: '';
     position: absolute;
-    left: 5px; top: 8px; bottom: 8px;
+    left: 6px; top: 10px; bottom: 10px;
     width: 1px;
     background: var(--rule);
   }
-  .tl-group + .tl-group { margin-top: 4px; }
+  .tl-group + .tl-group { margin-top: 10px; }
   .tl-phase {
-    margin: 16px 0 8px;
-    padding-left: 26px;
-    font-size: 0.74em;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
-    font-weight: normal;
-  }
-  .tl-items { list-style: none; margin: 0; padding: 0; }
-  .tl-item {
     position: relative;
-    padding: 0 0 16px 26px;
-    font-size: 0.82em;
+    margin: 0 0 12px;
+    padding-left: 30px;
+    font-family: var(--display);
+    font-variation-settings: 'wdth' 75;
+    font-stretch: 75%;
+    font-size: 1.35rem; font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.1;
   }
-  .tl-item:last-child { padding-bottom: 4px; }
+  .tl-group:first-child .tl-phase { color: var(--muted); }
+  .tl-items { list-style: none; margin: 0; padding: 0; }
+  .tl-item { position: relative; padding: 0 0 20px 30px; }
+  .tl-item:last-child { padding-bottom: 12px; }
   .tl-item p { margin: 1px 0; }
 
   .tl-mark {
     position: absolute;
-    left: 0;
-    box-sizing: border-box;
-    width: 11px; height: 11px;
-    top: 4px;
+    left: 0; top: 6px;
+    width: 13px; height: 13px;
   }
-  .tl-mark--stay { border-radius: 50%; box-shadow: 0 0 0 2px var(--bg); }
+  .tl-mark--stay { border-radius: 50%; box-shadow: 0 0 0 3px var(--ground); }
   .tl-mark--travel {
-    background: var(--bg);
-    border: 2px solid var(--fg);
+    background: var(--ground);
+    border: 2px solid var(--ink);
     border-radius: 2px;
   }
   .tl-mark--walk {
-    height: 4px;
-    top: 8px;
-    border-radius: 2px;
-    box-shadow: 0 0 0 2px var(--bg);
+    left: -1px; width: 15px;
+    height: 5px; top: 10px;
+    border-radius: 3px;
+    box-shadow: 0 0 0 3px var(--ground);
   }
 
-  .tl-title { font-weight: bold; }
+  .tl-title { font-weight: 700; font-size: 1.05rem; line-height: 1.35; }
   .tl-title .mode {
-    font-weight: normal;
-    font-style: italic;
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--muted);
-    padding-right: 3px;
+    vertical-align: 2px;
   }
-  .tl-title .arrow { color: var(--muted); font-weight: normal; padding: 0 2px; }
+  .tl-title .arrow { color: var(--muted); font-weight: 400; padding: 0 2px; }
   .tl-title a { text-decoration: none; }
   .tl-title a:hover { text-decoration: underline; }
-  .tl-meta { color: var(--muted); font-variant-numeric: tabular-nums; }
-  .tl-sub { color: var(--muted); font-size: 0.94em; margin-top: 4px; }
+  .tl-meta { font-family: var(--data); font-size: 0.84rem; font-variant-numeric: tabular-nums; }
+  .tl-meta .dur { color: var(--muted); }
+  .tl-item--stay .tl-meta { font-family: var(--body); font-size: 0.92rem; }
+  .tl-sub { color: var(--muted); font-size: 0.86rem; margin-top: 3px !important; }
   .tl-sub a { text-decoration: none; }
   .tl-sub a:hover { text-decoration: underline; }
-  .tl-sub .far { color: var(--muted); }
 
-  .profile-wrap { margin-top: 10px; }
+  /* ---- elevation ---- */
+  .elevation { margin-top: 56px; }
   .profile-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 12px;
-    font-size: 0.8em;
-    color: var(--muted);
+    display: flex; flex-wrap: wrap;
+    justify-content: space-between; align-items: baseline;
+    gap: 4px 16px;
+    font-size: 0.86rem; color: var(--muted);
   }
-  #readout { font-variant-numeric: tabular-nums; color: var(--fg); }
+  #readout { font-family: var(--data); font-variant-numeric: tabular-nums; color: var(--ink); }
   #readout.idle { color: var(--muted); }
   #profile {
     display: block;
     width: 100%;
-    height: 190px;
-    margin-top: 4px;
+    height: 220px;
+    margin-top: 8px;
     touch-action: none;
     cursor: crosshair;
     overflow: visible;
   }
-  #profile .area { fill-opacity: 0.15; }
+  #profile .area { fill-opacity: 0.18; }
   #profile .line { fill: none; stroke-width: 2; vector-effect: non-scaling-stroke; }
   #profile .axis { stroke: var(--rule); stroke-width: 1; vector-effect: non-scaling-stroke; }
   #profile .split {
-    stroke: var(--fg); stroke-width: 1; stroke-dasharray: 3 3;
+    stroke: var(--ink); stroke-width: 1; stroke-dasharray: 3 3;
     opacity: 0.45; vector-effect: non-scaling-stroke;
   }
-  #profile .gridlabel { fill: var(--muted); font-size: 11px; font-family: 'PT Serif', serif; }
-  #profile .daylabel { font-size: 11px; font-family: 'PT Serif', serif; }
-  #profile .cursor { stroke: var(--fg); stroke-width: 1; vector-effect: non-scaling-stroke; opacity: 0; }
-  #profile .cursor.on { opacity: 0.5; }
-  .hint { font-size: 0.72em; color: var(--muted); margin-top: 2px; }
+  #profile .gridlabel { fill: var(--muted); font-size: 11px; font-family: var(--data); }
+  #profile .daylabel { font-size: 11px; font-weight: 700; font-family: var(--body); letter-spacing: 0.08em; }
+  #profile .cursor { stroke: var(--ink); stroke-width: 1; vector-effect: non-scaling-stroke; opacity: 0; }
+  #profile .cursor.on { opacity: 0.6; }
+  .hint { font-size: 0.8rem; color: var(--muted); margin: 4px 0 0; }
 
+  footer {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px;
+    margin-top: 44px; padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    font-size: 0.86rem; color: var(--muted);
+  }
+  .gpx {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    background: var(--accent); color: var(--paper);
+    font-weight: 600; text-decoration: none;
+  }
+  .gpx:hover { filter: brightness(1.08); }
+
+  /* map furniture */
   .terminal-pin span {
     display: block;
-    width: 10px; height: 10px;
-    background: var(--bg);
-    border: 2px solid var(--fg);
+    width: 12px; height: 12px;
+    background: #fff;
+    border: 2px solid #14232f;
     border-radius: 2px;
   }
-
   .leaflet-tooltip.stay-tip {
-    font-family: 'PT Serif', serif;
+    font-family: var(--body);
     font-size: 12px;
-    font-weight: bold;
-    color: var(--fg);
+    font-weight: 700;
+    color: #14232f;
     text-align: center;
   }
-  .leaflet-tooltip.stay-tip .tip-sub { font-weight: normal; color: var(--muted); }
+  .leaflet-tooltip.stay-tip .tip-sub { font-weight: 400; color: #59676d; }
+  .leaflet-container { font-family: var(--body); }
 
   @media (max-width: 600px) {
-    body { font-size: 18px; }
-    #map { height: 340px; }
-    #profile { height: 150px; }
+    body { padding: 0 16px; font-size: 15px; }
+    .page { padding-block: 28px 24px; }
+    .stats { gap: 10px 24px; }
+    .stats dd { font-size: 1.1rem; }
+    #map { height: 360px; }
+    #profile { height: 170px; }
   }
 </style>
 </head>
 <body>
 
-<main>
-  <h2>Caminho da Nazaré</h2>
-  <p class="sub">Two days on foot, Nazaré to Fátima.</p>
+<div class="page">
+  <header>
+    <p class="eyebrow">A two-day walk</p>
+    <h1>Caminho da Nazaré</h1>
+    <p class="lede">On foot from the Atlantic at Nazaré, over the limestone hills past Porto de Mós, to the sanctuary at Fátima.</p>
 
-  <dl class="stats" id="stats"></dl>
+    <div class="stages" aria-label="Stages drawn to scale">
+      <div class="stage-bar" id="stagebar"></div>
+      <div class="stage-stops" id="stagestops"></div>
+    </div>
 
-  <h3>Itinerary</h3>
-  <div id="timeline"></div>
+    <dl class="stats" id="stats"></dl>
+  </header>
 
-  <h3>Route</h3>
-  <div id="map"></div>
+  <div class="plan">
+    <section class="itinerary-col">
+      <h2>Itinerary</h2>
+      <div id="timeline"></div>
+    </section>
 
-  <h3>Elevation</h3>
-  <div class="profile-wrap">
+    <section class="route-col">
+      <h2>Route</h2>
+      <div id="map"></div>
+    </section>
+  </div>
+
+  <section class="elevation">
+    <h2>Elevation</h2>
     <div class="profile-head">
       <span>Nazaré to Fátima</span>
-      <span id="readout" class="idle">—</span>
+      <span id="readout" class="idle">Move along the profile</span>
     </div>
     <svg id="profile" preserveAspectRatio="none" aria-label="Elevation profile of the route"></svg>
-    <p class="hint">Move along the profile to place that point on the map.</p>
-  </div>
-</main>
+    <p class="hint">The point under your cursor or finger is marked on the map.</p>
+  </section>
 
-<footer>
-  <a id="gpxlink" href="#">download the GPX</a>
-</footer>
+  <footer>
+    <a id="gpxlink" class="gpx" href="#">Download the GPX</a>
+  </footer>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
@@ -259,7 +363,12 @@ function climb(i0, i1) {
   return { up, down };
 }
 
-const PALETTE = ['#0077c0', '#b85c00', '#2a7d45', '#7b2d8b'];
+/* day colours come from the CSS tokens, so the theme owns them */
+const css = getComputedStyle(document.documentElement);
+const token = name => css.getPropertyValue(name).trim();
+const PALETTE = ['--day1', '--day2', '--day3', '--day4'].map(token);
+const INK = token('--ink') || '#14232f';
+const MUTED = token('--muted') || '#59676d';
 
 /* start, then each overnight's town, then the finish */
 const PLACES = ['Nazaré', ...STAYS.filter(s => s.role === 'overnight').map(s => s.town), 'Fátima'];
@@ -293,6 +402,13 @@ document.getElementById('stats').innerHTML = [
   ['Days', DAYS.length],
 ].map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
 
+/* ---- stage strip: bars and stops placed by distance ---- */
+document.getElementById('stagebar').innerHTML = DAYS.map(d =>
+  `<span style="flex:${d.dist.toFixed(0)};background:${d.color}" title="${d.name}"></span>`).join('');
+document.getElementById('stagestops').innerHTML = edges.map((idx, i) =>
+  `<span class="stop" style="left:${(cum[idx] / total * 100).toFixed(2)}%">
+    <b>${PLACES[i]}</b><span class="num">${km(cum[idx])} km · ${Math.round(PTS[idx][2])} m</span></span>`).join('');
+
 /* ---- itinerary ----
    The data carries no dates, so chronology is derived from the shape of the
    trip: (phase, slot). phase 0 is the day before setting off and phase N the
@@ -302,7 +418,7 @@ const FIRST_PLACE = PLACES[0];
 const LAST_PLACE = PLACES[PLACES.length - 1];
 
 /* colour of the night at the end of walking day n, and of that day's line */
-const nightColor = n => n === 0 ? 'var(--muted)' : DAYS[n - 1].color;
+const nightColor = n => n === 0 ? 'var(--muted)' : `var(--day${n})`;
 
 function buildTimeline() {
   const items = [];
@@ -366,7 +482,7 @@ function renderRow(it) {
     ? 'The night before setting off'
     : `End of Day ${it.night} · ${km(cum[SPLITS[it.night - 1]])} km in · `
       + `${km(total - cum[SPLITS[it.night - 1]])} km still to walk`;
-  return `<li class="tl-item">
+  return `<li class="tl-item tl-item--stay">
     <span class="tl-mark tl-mark--stay" style="background:${nightColor(it.night)}"></span>
     <div class="tl-body">
       <p class="tl-title"><a href="${s.url}" rel="noreferrer">${s.name}</a></p>
@@ -414,7 +530,7 @@ for (const st of STAYS) {
   if (!isStart) seen++;
   L.circleMarker([st.lat, st.lon], {
     radius: 7, color: '#fff', weight: 2,
-    fillColor: isStart ? '#6f6b6b' : DAYS[Math.min(seen, DAYS.length) - 1].color,
+    fillColor: isStart ? MUTED : DAYS[Math.min(seen, DAYS.length) - 1].color,
     fillOpacity: 1
   }).addTo(map).bindTooltip(
     `${st.name}<br><span class="tip-sub">${st.town}</span>`,
@@ -438,7 +554,7 @@ for (const t of TRAVEL) {
 }
 
 const dot = L.circleMarker([PTS[0][0], PTS[0][1]], {
-  radius: 6, color: '#fff', weight: 2, fillColor: '#1d242b', fillOpacity: 1
+  radius: 6, color: '#fff', weight: 2, fillColor: INK, fillOpacity: 1
 });
 
 /* ---- elevation profile ---- */
@@ -533,7 +649,7 @@ function clear() {
   cursor.classList.remove('on');
   dot.remove();
   readout.classList.add('idle');
-  readout.textContent = '—';
+  readout.textContent = 'Move along the profile';
 }
 
 svg.addEventListener('pointermove', e => { e.preventDefault(); show(e.clientX); });
