@@ -1,0 +1,53 @@
+{{- /* Usage: {{< gpx "route.gpx" >}}
+       or     {{< gpx src="route.gpx" caption="Nazaré → Fátima" download=true >}}
+       or     {{< gpx src="day-1.gpx, day-2.gpx" labels="Day 1, Day 2" >}}
+       or     {{< gpx src="stage-*.gpx" >}}   (globs match in name order)
+       (Hugo can't mix positional and named params.) The GPX files must live in the post's
+       page bundle. Several files share one map, each in its own colour with a legend row.
+       Labels default to the GPX's own track name. The "Download GPX" link is off unless
+       download=true. map-only=true renders just the map: no stats, legend or caption. */ -}}
+{{- $mapOnly := eq (printf "%v" (.Get "map-only")) "true" -}}
+{{- $src := cond .IsNamedParams (.Get "src") (.Get 0) -}}
+{{- $files := slice -}}
+{{- range split $src "," -}}
+  {{- $pattern := trim . " " -}}
+  {{- $matches := $.Page.Resources.Match $pattern -}}
+  {{- if not $matches -}}
+    {{- errorf "gpx shortcode: %q not found in page bundle of %s" $pattern $.Page.File.Path -}}
+  {{- end -}}
+  {{- range sort $matches "Name" }}{{ $files = $files | append . }}{{ end -}}
+{{- end -}}
+{{- $labels := slice -}}
+{{- with .Get "labels" -}}
+  {{- range split . "," }}{{ $labels = $labels | append (trim . " ") }}{{ end -}}
+  {{- if ne (len $labels) (len $files) -}}
+    {{- errorf "gpx shortcode: %d labels for %d files in %s" (len $labels) (len $files) $.Page.File.Path -}}
+  {{- end -}}
+{{- end -}}
+{{- $tracks := slice -}}
+{{- range $i, $f := $files -}}
+  {{- $tracks = $tracks | append (dict "url" $f.RelPermalink "label" (index $labels $i | default "")) -}}
+{{- end -}}
+{{- if not (.Page.Store.Get "gpxAssets") -}}
+  {{- .Page.Store.Set "gpxAssets" true -}}
+  {{- $js := resources.Get "js/gpx.js" | js.Build (dict "minify" true) | fingerprint -}}
+  {{- $css := resources.Get "css/gpx.css" | minify | fingerprint -}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script defer src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+{{- end }}
+<figure class="gpx{{ if $mapOnly }} gpx--map-only{{ end }}" data-tracks="{{ $tracks | jsonify }}">
+  {{- if not $mapOnly }}
+  <div class="gpx-stats" aria-live="polite">Loading route…</div>
+  {{- end }}
+  <div class="gpx-map"></div>
+  {{- if not $mapOnly }}
+  <figcaption>
+    {{- with .Get "caption" }}<span>{{ . }}</span>{{ end -}}
+    {{- if eq (printf "%v" (.Get "download")) "true" }}
+      {{- range $files }} <a href="{{ .RelPermalink }}" download>Download {{ if gt (len $files) 1 }}{{ .Name }}{{ else }}GPX{{ end }}</a>{{ end -}}
+    {{- end -}}
+  </figcaption>
+  {{- end }}
+</figure>

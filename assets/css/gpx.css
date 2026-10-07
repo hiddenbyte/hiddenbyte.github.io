@@ -1,0 +1,64 @@
+/* Styles for layouts/shortcodes/gpx.html. Plain CSS (not Sass) so it builds with
+   non-extended Hugo too. Colours mirror the palette in assets/sass/_base.scss. */
+
+.gpx { margin: 1.5em 0; }
+.gpx--map-only { margin: 1em 0; }
+
+.gpx .gpx-stats {
+  font-size: 0.85em;
+  color: #6f6b6b;
+  margin-bottom: 0.4em;
+}
+.gpx .gpx-stats b { color: #1d242b; }
+
+.gpx .gpx-map {
+  height: 360px;
+  border: 1px solid #dfdfdf;
+  border-radius: 3px;
+}
+@media (max-width: 600px) { .gpx .gpx-map { height: 260px; } }
+
+/* Undo the global post `img` rule (entry.scss) for Leaflet tiles and icons. */
+.gpx .gpx-map img {
+  width: auto;
+  max-width: none;
+  transition: none;
+}
+
+.gpx figcaption {
+  font-size: 0.8em;
+  font-style: italic;
+  color: #6f6b6b;
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+}
+.gpx figcaption a { font-style: normal; margin-left: auto; }
+
+.gpx .gpx-legend {
+  list-style: none;
+  margin: 0.3em 0 0;
+  padding: 0;
+  font-size: 0.9em;
+  font-variant-numeric: tabular-nums;
+}
+.gpx .gpx-legend li {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0 0.8em;
+}
+.gpx .gpx-swatch {
+  width: 14px;
+  height: 4px;
+  border-radius: 2px;
+  flex: none;
+}
+.gpx .gpx-label { color: #1d242b; min-width: 4.5em; }
+
+.gpx .gpx-error {
+  margin: 0;
+  padding: 1em;
+  font-size: 0.85em;
+  color: #6f6b6b;
+}
