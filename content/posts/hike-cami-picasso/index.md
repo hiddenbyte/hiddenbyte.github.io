@@ -1,7 +1,7 @@
 ---
 title: "Camí de Picasso"
 date: 2026-10-07
-draft: true
+draft: false
 tags: ["hiking", "photography"]
 ---
 
