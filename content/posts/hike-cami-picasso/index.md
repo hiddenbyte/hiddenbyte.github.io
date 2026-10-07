@@ -5,19 +5,14 @@ draft: false
 tags: ["hiking", "photography"]
 ---
 
-> "The only journey is the one within." - Rainer Maria Rilke 
+> "The only journey is the one within." - Rainer Maria Rilke
 
+Last month, between the 2nd and 5th of September, I hiked a trail known as the [Camí de Picasso](https://hiking-trails.com/trail/cami-picasso/) in Catalonia, Spain, over four days.
 
-Last month, between the 2nd and 5th of September, I hiked trail known as the [Camí de Picasso](https://hiking-trails.com/trail/cami-picasso/) in Catalonia, Spain, over four days:
+### Day 1 - Guardiola de Berguedà - Saldes
 
-* Day 1 - Guardiola de Berguedà - Saldes, **21.1 km**, +1,016 / −541 m
-* Day 2 -  Saldes - Gósol, **10.6 km**, +456 / −256 m
-* Day 3 - Gósol - Prat d’Aguiló, **13.6 km**, +1,096 / −527 m
-* Day 4 - Prat d’Aguiló – Bellver de Cerdanya, **18.6 km**, +193 / −1,150 m
-
-{{< gpx src="stage-*.gpx" map-only=true >}}
-
-No words could describe the Camí de Picasso better than the following photos.
+Distance: 21.1 km
+Elevation: +1,016 / −541 m
 
 ![](day-1/IMG_20260902_073223254.jpg)
 *Day 1 - Guardiola de Berguedà - Saldes*
@@ -37,21 +32,30 @@ No words could describe the Camí de Picasso better than the following photos.
 ![](day-1/IMG_20260902_125914413.jpg)
 *Day 1 - Guardiola de Berguedà - Saldes*
 
+### Day 2 - Saldes - Gósol
+
+Distance: 10.6 km
+Elevation: +456 / −256 m
+
 ![](day-2/IMG_20260903_092117528.jpg)
-*Day 2 -  Saldes - Gósol*
+*Day 2 - Saldes - Gósol*
 
 ![](day-2/IMG_20260903_115855202.jpg)
-*Day 2 -  Saldes - Gósol*
+*Day 2 - Saldes - Gósol*
 
 ![](day-2/IMG_20260903_120848164.jpg)
-*Day 2 -  Saldes - Gósol*
+*Day 2 - Saldes - Gósol*
 
 ![](day-2/IMG_20260903_162041596.jpg)
-*Day 2 -  Saldes - Gósol*
+*Day 2 - Saldes - Gósol*
 
 ![](day-2/IMG_20260903_163610052.jpg)
-*Day 2 -  Saldes - Gósol*
+*Day 2 - Saldes - Gósol*
 
+### Day 3 - Gósol - Prat d’Aguiló
+
+Distance: 13.6 km
+Elevation: +1,096 / −527 m
 
 ![](day-3/IMG_20260904_083146894.jpg)
 *Day 3 - Gósol - Prat d’Aguiló*
@@ -68,6 +72,10 @@ No words could describe the Camí de Picasso better than the following photos.
 ![](day-3/IMG_20260904_200819288.jpg)
 *Day 3 - Gósol - Prat d’Aguiló*
 
+### Day 4 - Prat d’Aguiló – Bellver de Cerdanya
+
+Distance: 18.6 km
+Elevation: +193 / −1,150 m
 
 ![](day-4/IMG_20260905_073704389.jpg)
 *Day 4 - Prat d’Aguiló – Bellver de Cerdanya*
